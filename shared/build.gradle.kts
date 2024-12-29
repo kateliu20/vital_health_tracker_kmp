@@ -36,6 +36,7 @@ kotlin {
             implementation(compose.material3)
             implementation(compose.ui)
             implementation(libs.kotlinx.datetime)
+            implementation(libs.koalaplot)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
