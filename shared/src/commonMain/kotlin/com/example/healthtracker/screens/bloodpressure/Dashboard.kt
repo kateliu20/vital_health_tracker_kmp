@@ -1,0 +1,135 @@
+package com.example.healthtracker.screens.bloodpressure
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import com.example.healthtracker.data.BPReading
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DashboardScreen(
+    viewModel: BloodPressureViewModel,
+    onAddReading: () -> Unit
+) {
+    val readings = viewModel.readings.value
+    val scrollState = rememberScrollState()
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("BP Dashboard") },
+                actions = {
+                    IconButton(onClick = onAddReading) {
+                        Icon(
+                            imageVector = Icons.Default.Add,
+                            contentDescription = "Add reading"
+                        )
+                    }
+                }
+            )
+        }
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .verticalScroll(scrollState)
+        ) {
+            LazyRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                item {
+                    val latest = viewModel.getLatestReading()
+                    StatCard(
+                        "Latest Reading",
+                        if (latest != null) "${latest.systolic}/${latest.diastolic}" else "No data"
+                    )
+                }
+            }
+
+            // Recent Readings Section
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+            ) {
+                Column(
+                    modifier = Modifier
+                        .padding(16.dp)
+                ) {
+                    Text(
+                        "Recent Readings",
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    if (readings.isEmpty()) {
+                        Text(
+                            "No readings recorded yet",
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                    } else {
+                        readings.take(5).forEach { reading ->
+                            ReadingItem(reading)
+                            HorizontalDivider()
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun StatCard(title: String, value: String) {
+    Card(
+        modifier = Modifier.width(160.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.bodyMedium
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = value,
+                style = MaterialTheme.typography.titleLarge
+            )
+        }
+    }
+}
+
+@Composable
+private fun ReadingItem(reading: BPReading) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            "${reading.systolic}/${reading.diastolic}",
+            style = MaterialTheme.typography.titleMedium
+        )
+
+        Text(
+            "Today", // Replace with actual date formatting
+            style = MaterialTheme.typography.bodyMedium
+        )
+    }
+}

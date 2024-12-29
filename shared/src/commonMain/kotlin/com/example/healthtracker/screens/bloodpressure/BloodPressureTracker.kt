@@ -14,10 +14,12 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BloodPressureTrackerScreen(
-    onBackClick: () -> Unit
+    viewModel: BloodPressureViewModel,
+    onBackClick: () -> Unit,
 ) {
     var systolicPressure by remember { mutableStateOf("") }
     var diastolicPressure by remember { mutableStateOf("") }
+    var showError by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -77,10 +79,14 @@ fun BloodPressureTrackerScreen(
                     val diastolicValue = diastolicPressure.toIntOrNull()
 
                     if (systolicValue != null && diastolicValue != null) {
-                        // TODO: Implement actual save logic
-                        println("Saving Blood Pressure - Systolic: $systolicValue, Diastolic: $diastolicValue")
+                        viewModel.addReading(systolicValue, diastolicValue)
+                        // Clear the input fields after saving
+                        systolicPressure = ""
+                        diastolicPressure = ""
+                        // Navigate back to dashboard
+                        onBackClick()
                     } else {
-                        // TODO: Show error to user
+                        showError = true
                         println("Please enter valid blood pressure values")
                     }
                 },

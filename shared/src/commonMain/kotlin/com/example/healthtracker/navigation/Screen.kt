@@ -1,6 +1,7 @@
 package com.example.healthtracker.navigation
 
 sealed class Screen {
-    data object Welcome : Screen()
+    data object WelcomeScreen : Screen()
+    data object Dashboard : Screen()
     data object BloodPressureTracker : Screen()
 }
