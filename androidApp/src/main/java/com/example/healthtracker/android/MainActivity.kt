@@ -8,6 +8,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.healthtracker.HealthComponent
 import com.example.healthtracker.screens.app
 import com.example.healthtracker.theme.AppTheme
 
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    app()
+                    app(component = HealthComponent())
                 }
             }
         }
@@ -31,6 +32,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     MyApplicationTheme {
-        app()
+        app(component = HealthComponent())
     }
 }
