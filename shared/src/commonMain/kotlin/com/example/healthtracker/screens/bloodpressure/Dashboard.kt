@@ -11,127 +11,132 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.healthtracker.HealthComponent
 import com.example.healthtracker.data.BPReading
+import com.example.healthtracker.screens.AppScaffold
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen(
+    component: HealthComponent,
     viewModel: BloodPressureViewModel,
     onAddReading: () -> Unit
 ) {
     val readings = viewModel.readings.value
     val scrollState = rememberScrollState()
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("BP Dashboard") },
-                actions = {
-                    IconButton(onClick = onAddReading) {
-                        Icon(
-                            imageVector = Icons.Default.Add,
-                            contentDescription = "Add reading"
+    AppScaffold(component = component) { paddingValues ->
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text("BP Dashboard") },
+                    actions = {
+                        IconButton(onClick = onAddReading) {
+                            Icon(
+                                imageVector = Icons.Default.Add,
+                                contentDescription = "Add reading"
+                            )
+                        }
+                    }
+                )
+            }
+        ) { paddingValues ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .verticalScroll(scrollState)
+            ) {
+                LazyRow(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    item {
+                        val latest = viewModel.getLatestReading()
+                        StatCard(
+                            "Latest Reading",
+                            if (latest != null) "${latest.systolic}/${latest.diastolic}" else "No data"
                         )
                     }
                 }
-            )
-        }
-    ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .verticalScroll(scrollState)
-        ) {
-            LazyRow(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
-                horizontalArrangement = Arrangement.Center
-            ) {
-                item {
-                    val latest = viewModel.getLatestReading()
-                    StatCard(
-                        "Latest Reading",
-                        if (latest != null) "${latest.systolic}/${latest.diastolic}" else "No data"
-                    )
-                }
-            }
 
-            // Blood Pressure Graph Card
-//            Card(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(8.dp)
-//            ) {
-//                Column(
-//                    modifier = Modifier
-//                        .padding(16.dp)
-//                ) {
-//                    Text(
-//                        "Blood Pressure Trend",
-//                        style = MaterialTheme.typography.titleMedium
-//                    )
-//                    Spacer(modifier = Modifier.height(8.dp))
-//
-//                    BloodPressureGraph(
-//                        readings = readings.map {
-//                            BloodPressureReading(
-//                                systolic = it.systolic,
-//                                diastolic = it.diastolic
-//                            )
-//                        },
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                            .height(200.dp)
-//                    )
-//                }
-//            }
+                // Blood Pressure Graph Card
+                //            Card(
+                //                modifier = Modifier
+                //                    .fillMaxWidth()
+                //                    .padding(8.dp)
+                //            ) {
+                //                Column(
+                //                    modifier = Modifier
+                //                        .padding(16.dp)
+                //                ) {
+                //                    Text(
+                //                        "Blood Pressure Trend",
+                //                        style = MaterialTheme.typography.titleMedium
+                //                    )
+                //                    Spacer(modifier = Modifier.height(8.dp))
+                //
+                //                    BloodPressureGraph(
+                //                        readings = readings.map {
+                //                            BloodPressureReading(
+                //                                systolic = it.systolic,
+                //                                diastolic = it.diastolic
+                //                            )
+                //                        },
+                //                        modifier = Modifier
+                //                            .fillMaxWidth()
+                //                            .height(200.dp)
+                //                    )
+                //                }
+                //            }
 
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-            ) {
-                Column(
+                Card(
                     modifier = Modifier
-                        .padding(16.dp)
+                        .fillMaxWidth()
+                        .padding(8.dp)
                 ) {
-                    Text(
-                        "Blood Pressure Trend",
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Column(
+                        modifier = Modifier
+                            .padding(16.dp)
+                    ) {
+                        Text(
+                            "Blood Pressure Trend",
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
 
-                    SimpleChart()
+                        SimpleChart()
+                    }
                 }
-            }
 
                 // Recent Readings Section
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-            ) {
-                Column(
+                Card(
                     modifier = Modifier
-                        .padding(16.dp)
+                        .fillMaxWidth()
+                        .padding(8.dp)
                 ) {
-                    Text(
-                        "Recent Readings",
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    if (readings.isEmpty()) {
+                    Column(
+                        modifier = Modifier
+                            .padding(16.dp)
+                    ) {
                         Text(
-                            "No readings recorded yet",
-                            style = MaterialTheme.typography.bodyMedium
+                            "Recent Readings",
+                            style = MaterialTheme.typography.titleMedium
                         )
-                    } else {
-                        readings.take(5).forEach { reading ->
-                            ReadingItem(reading)
-                            HorizontalDivider()
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        if (readings.isEmpty()) {
+                            Text(
+                                "No readings recorded yet",
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                        } else {
+                            readings.take(5).forEach { reading ->
+                                ReadingItem(reading)
+                                HorizontalDivider()
+                            }
                         }
                     }
                 }

@@ -10,19 +10,22 @@ import com.example.healthtracker.screens.welcome.WelcomeScreen
 
 @Composable
 fun app(component: HealthComponent) {
-    when (val screen = component.currentScreen.value) {
+    when (component.currentScreen.value) {
         Screen.WelcomeScreen -> WelcomeScreen(
+            component = component,
             onNavigateToBloodPressure = {
                 component.navigateTo(Screen.Dashboard)
             }
         )
         Screen.Dashboard -> DashboardScreen(
+            component = component,
             viewModel = component.viewModel,
             onAddReading = {
                 component.navigateTo(Screen.BloodPressureTracker)
             }
         )
         Screen.BloodPressureTracker -> BloodPressureTrackerScreen(
+            component = component,
             viewModel = component.viewModel,
             onBackClick = {
                 component.navigateTo(Screen.Dashboard)

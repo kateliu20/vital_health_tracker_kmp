@@ -8,36 +8,43 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.healthtracker.HealthComponent
+import com.example.healthtracker.screens.AppScaffold
 import health_tracker.shared.generated.resources.Res
 import health_tracker.shared.generated.resources.vitro
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun WelcomeScreen(onNavigateToBloodPressure: () -> Unit) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            "Welcome to"
-        )
-        Image(
-            painter = painterResource(Res.drawable.vitro),
-            contentDescription = "Vitro Logo",
-            modifier = Modifier.fillMaxWidth()
-        )
-        Button(
-            onClick = onNavigateToBloodPressure,
-            modifier = Modifier.padding(top = 8.dp)
+fun WelcomeScreen(
+    component: HealthComponent,
+    onNavigateToBloodPressure: () -> Unit
+) {
+    AppScaffold(component = component) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("Go to Health Dashboard")
+            Text("Welcome to")
+            Image(
+                painter = painterResource(Res.drawable.vitro),
+                contentDescription = "Vitro Logo",
+                modifier = Modifier.fillMaxWidth()
+            )
+            Button(
+                onClick = onNavigateToBloodPressure,
+                modifier = Modifier.padding(top = 8.dp)
+            ) {
+                Text("Go to Health Dashboard")
+            }
         }
     }
 }
