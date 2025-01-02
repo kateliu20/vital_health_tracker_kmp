@@ -58,7 +58,56 @@ fun DashboardScreen(
                 }
             }
 
-            // Recent Readings Section
+            // Blood Pressure Graph Card
+//            Card(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(8.dp)
+//            ) {
+//                Column(
+//                    modifier = Modifier
+//                        .padding(16.dp)
+//                ) {
+//                    Text(
+//                        "Blood Pressure Trend",
+//                        style = MaterialTheme.typography.titleMedium
+//                    )
+//                    Spacer(modifier = Modifier.height(8.dp))
+//
+//                    BloodPressureGraph(
+//                        readings = readings.map {
+//                            BloodPressureReading(
+//                                systolic = it.systolic,
+//                                diastolic = it.diastolic
+//                            )
+//                        },
+//                        modifier = Modifier
+//                            .fillMaxWidth()
+//                            .height(200.dp)
+//                    )
+//                }
+//            }
+
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+            ) {
+                Column(
+                    modifier = Modifier
+                        .padding(16.dp)
+                ) {
+                    Text(
+                        "Blood Pressure Trend",
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    SimpleChart()
+                }
+            }
+
+                // Recent Readings Section
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
