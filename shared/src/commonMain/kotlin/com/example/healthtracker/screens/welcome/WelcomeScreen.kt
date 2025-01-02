@@ -5,12 +5,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import health_tracker.shared.generated.resources.Res
+import health_tracker.shared.generated.resources.vitro
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun WelcomeScreen(onNavigateToBloodPressure: () -> Unit) {
@@ -22,20 +26,18 @@ fun WelcomeScreen(onNavigateToBloodPressure: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Welcome to Health Tracker",
-            style = MaterialTheme.typography.headlineMedium
+            "Welcome to"
         )
-
-        Text(
-            text = "Start your wellness journey",
-            style = MaterialTheme.typography.bodyLarge
+        Image(
+            painter = painterResource(Res.drawable.vitro),
+            contentDescription = "Vitro Logo",
+            modifier = Modifier.fillMaxWidth()
         )
-
         Button(
             onClick = onNavigateToBloodPressure,
             modifier = Modifier.padding(top = 8.dp)
         ) {
-            Text("Track Blood Pressure")
+            Text("Go to Health Dashboard")
         }
     }
 }
