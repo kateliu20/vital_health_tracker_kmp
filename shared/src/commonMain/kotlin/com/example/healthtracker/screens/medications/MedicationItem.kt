@@ -20,40 +20,40 @@ import com.example.healthtracker.data.Medication
 
 @Composable
 fun MedicationItem(
-    medication: Medication,
-    onEditClick: () -> Unit,
-    onDeleteClick: () -> Unit
+  medication: Medication,
+  onEditClick: () -> Unit,
+  onDeleteClick: () -> Unit
 ) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Column {
-            Text(
-                text = medication.name,
-                style = MaterialTheme.typography.titleMedium
-            )
-            Text(
-                text = "${medication.dosage} - ${medication.type}",
-                style = MaterialTheme.typography.bodyMedium
-            )
-            // Schedule display
-            Text(
-                text = "Times: ${medication.schedule.joinToString { it.toString() }}",
-                style = MaterialTheme.typography.bodySmall
-            )
-        }
-
-        Row {
-            IconButton(onClick = onEditClick) {
-                Icon(Icons.Default.Edit, contentDescription = "Edit")
-            }
-            IconButton(onClick = onDeleteClick) {
-                Icon(Icons.Default.Delete, contentDescription = "Delete")
-            }
-        }
+  Row(
+    modifier = Modifier
+      .fillMaxWidth()
+      .padding(vertical = 8.dp),
+    verticalAlignment = Alignment.CenterVertically,
+    horizontalArrangement = Arrangement.SpaceBetween,
+  ) {
+    Column {
+      Text(
+        text = medication.name,
+        style = MaterialTheme.typography.titleMedium
+      )
+      Text(
+        text = "${medication.dosage} - ${medication.type}",
+        style = MaterialTheme.typography.bodyMedium,
+      )
+      // Schedule display
+      Text(
+        text = "Times: ${medication.schedule.joinToString { it.toString() }}",
+        style = MaterialTheme.typography.bodySmall,
+      )
     }
+
+    Row {
+      IconButton(onClick = onEditClick) {
+        Icon(Icons.Default.Edit, contentDescription = "Edit")
+      }
+      IconButton(onClick = onDeleteClick) {
+        Icon(Icons.Default.Delete, contentDescription = "Delete")
+      }
+    }
+  }
 }
