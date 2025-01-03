@@ -15,7 +15,7 @@ class BloodPressureViewModel {
             diastolic = diastolic,
             timestamp = Clock.System.now().toEpochMilliseconds()
         )
-        _readings.value = _readings.value + newReading
+        _readings.value += newReading
     }
 
     fun getLatestReading(): BPReading? = readings.value.maxByOrNull { it.timestamp }

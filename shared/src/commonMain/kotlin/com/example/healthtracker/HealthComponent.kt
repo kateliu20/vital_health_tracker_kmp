@@ -3,9 +3,11 @@ package com.example.healthtracker
 import androidx.compose.runtime.mutableStateOf
 import com.example.healthtracker.navigation.Screen
 import com.example.healthtracker.screens.bloodpressure.BloodPressureViewModel
+import com.example.healthtracker.screens.medications.MedicationViewModel
 
 class HealthComponent {
-    val viewModel = BloodPressureViewModel()
+    val viewBloodPressureModel = BloodPressureViewModel()
+    val viewMedicationModel = MedicationViewModel()
     val currentScreen = mutableStateOf<Screen>(Screen.WelcomeScreen)
 
     fun navigateTo(screen: Screen) {
