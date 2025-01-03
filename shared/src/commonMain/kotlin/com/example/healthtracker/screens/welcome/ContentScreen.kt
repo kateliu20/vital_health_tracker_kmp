@@ -31,7 +31,7 @@ fun ContentScreen(component: HealthComponent) {
       MedicationScreen(
         component = component,
         medicationViewModel = component.viewMedicationModel,
-        appointmentViewModel = component.appointmentViewModel
-        )
+        appointmentViewModel = component.appointmentViewModel,
+      )
   }
 }

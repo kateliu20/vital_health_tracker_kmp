@@ -19,23 +19,14 @@ import androidx.compose.ui.unit.dp
 import com.example.healthtracker.data.Medication
 
 @Composable
-fun MedicationItem(
-  medication: Medication,
-  onEditClick: () -> Unit,
-  onDeleteClick: () -> Unit
-) {
+fun MedicationItem(medication: Medication, onEditClick: () -> Unit, onDeleteClick: () -> Unit) {
   Row(
-    modifier = Modifier
-      .fillMaxWidth()
-      .padding(vertical = 8.dp),
+    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
     verticalAlignment = Alignment.CenterVertically,
     horizontalArrangement = Arrangement.SpaceBetween,
   ) {
     Column {
-      Text(
-        text = medication.name,
-        style = MaterialTheme.typography.titleMedium
-      )
+      Text(text = medication.name, style = MaterialTheme.typography.titleMedium)
       Text(
         text = "${medication.dosage} - ${medication.type}",
         style = MaterialTheme.typography.bodyMedium,
@@ -48,9 +39,7 @@ fun MedicationItem(
     }
 
     Row {
-      IconButton(onClick = onEditClick) {
-        Icon(Icons.Default.Edit, contentDescription = "Edit")
-      }
+      IconButton(onClick = onEditClick) { Icon(Icons.Default.Edit, contentDescription = "Edit") }
       IconButton(onClick = onDeleteClick) {
         Icon(Icons.Default.Delete, contentDescription = "Delete")
       }

@@ -17,7 +17,8 @@ import kotlinx.datetime.*
 fun MedicationScreen(
   component: HealthComponent,
   medicationViewModel: MedicationViewModel,
-  appointmentViewModel: AppointmentViewModel) {
+  appointmentViewModel: AppointmentViewModel,
+) {
   var showAddDialog by remember { mutableStateOf(false) }
 
   AppScaffold(component = component) { paddingValues ->
