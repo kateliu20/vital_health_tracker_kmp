@@ -24,27 +24,21 @@ import kotlinx.datetime.toLocalDateTime
 
 @Composable
 fun MedicationsSection(viewModel: MedicationViewModel, selectedDate: LocalDate) {
-  // Filter medications for the selected date
-  // Note: You'll need to implement the actual filtering logic based on your requirements
-  val medicationsForDay =
-    viewModel.medications.filter { medication ->
-      // Placeholder filtering - replace with actual logic
-      true
-    }
-
-  // Section Header
   Text(
     "Medications",
     style = MaterialTheme.typography.titleMedium,
     modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
   )
 
-  if (medicationsForDay.isNotEmpty()) {
+  if (viewModel.medications.isNotEmpty()) {
     LazyColumn(
-      modifier = Modifier.fillMaxWidth().height(200.dp).padding(horizontal = 16.dp),
+      modifier = Modifier
+        .fillMaxWidth()
+        .height(200.dp)
+        .padding(horizontal = 16.dp),
       verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-      items(medicationsForDay) { medication ->
+      items(viewModel.medications) { medication ->
         MedicationItem(
           medication = medication,
           onEditClick = { /* TODO: Implement edit medication */ },
@@ -53,8 +47,16 @@ fun MedicationsSection(viewModel: MedicationViewModel, selectedDate: LocalDate) 
       }
     }
   } else {
-    Box(modifier = Modifier.fillMaxWidth().padding(16.dp), contentAlignment = Alignment.Center) {
-      Text("No medications for $selectedDate", style = MaterialTheme.typography.bodyMedium)
+    Box(
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(16.dp),
+      contentAlignment = Alignment.Center
+    ) {
+      Text(
+        "No medications",
+        style = MaterialTheme.typography.bodyMedium
+      )
     }
   }
 }
