@@ -6,7 +6,7 @@ data class Medication(
     val name: String,
     val dosage: String,
     val schedule: List<LocalTime>,
-    val type: MedicationType
+    val type: MedicationType,
 )
 
 enum class MedicationType {
