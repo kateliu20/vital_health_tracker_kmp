@@ -58,4 +58,5 @@ android {
 }
 dependencies {
     implementation(libs.androidx.runtime.android)
+    implementation(libs.compose.material3)
 }
