@@ -47,6 +47,7 @@ kotlin {
       implementation(libs.koalaplot.core)
       implementation(compose.components.resources)
       implementation(libs.kmp.date.time.picker)
+      implementation(libs.kmp.uiud)
     }
     commonTest.dependencies { implementation(libs.kotlin.test) }
   }

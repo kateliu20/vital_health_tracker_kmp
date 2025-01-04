@@ -2,17 +2,21 @@ package com.example.healthtracker.viewmodels
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import com.benasher44.uuid.uuid4
 import com.example.healthtracker.data.Appointment
 
 class AppointmentViewModel {
   private val _appointments = mutableStateOf<List<Appointment>>(emptyList())
   val appointments: State<List<Appointment>> = _appointments
 
-  fun addAppointment(title: String) {
+  fun addAppointment(title: String, time: Long) {
+    val newAppointment = Appointment(
+      id = uuid4().toString(),
+      title = title,
+      date = time
+    )
 
-    val newAppointment = Appointment(id = "hello", title = title, date = 111)
-
-    _appointments.value = _appointments.value + newAppointment
+    _appointments.value += newAppointment
   }
 
   fun deleteAppointment(appointment: Appointment) {

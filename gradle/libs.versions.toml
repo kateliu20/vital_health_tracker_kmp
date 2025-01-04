@@ -10,6 +10,7 @@ runtimeAndroid = "1.7.6"
 koalaplot = "0.7.0"
 coreI18n = "1.0.0-alpha01"
 date-time = "1.0.7"
+uiud = "0.8.4"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -24,6 +25,7 @@ androidx-runtime-android = { group = "androidx.compose.runtime", name = "runtime
 koalaplot-core = { group = "io.github.koalaplot", name = "koalaplot-core", version.ref = "koalaplot" }
 androidx-core-i18n = { group = "androidx.core", name = "core-i18n", version.ref = "coreI18n" }
 kmp-date-time-picker = { module = "network.chaintech:kmp-date-time-picker", version.ref = "date-time" }
+kmp-uiud = { module = "com.benasher44:uuid", version.ref = "uiud"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
