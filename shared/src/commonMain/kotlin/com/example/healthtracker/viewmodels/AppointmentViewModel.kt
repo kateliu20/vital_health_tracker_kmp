@@ -10,14 +10,11 @@ class AppointmentViewModel {
 
   fun addAppointment(title: String) {
 
-    val newAppointment = Appointment(
-      id = "hello",
-      title = title,
-      date = 111
-    )
+    val newAppointment = Appointment(id = "hello", title = title, date = 111)
 
     _appointments.value = _appointments.value + newAppointment
   }
+
   fun deleteAppointment(appointment: Appointment) {
     _appointments.value = _appointments.value.filter { it.id != appointment.id }
   }
