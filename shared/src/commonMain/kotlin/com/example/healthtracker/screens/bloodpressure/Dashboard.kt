@@ -14,16 +14,19 @@ import androidx.compose.ui.unit.dp
 import com.example.healthtracker.HealthComponent
 import com.example.healthtracker.data.BPReading
 import com.example.healthtracker.screens.AppScaffold
+import com.example.healthtracker.screens.medications.ReadOnlyAppointmentItem
+import com.example.healthtracker.viewmodels.AppointmentViewModel
 import com.example.healthtracker.viewmodels.BloodPressureViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen(
   component: HealthComponent,
-  viewModel: BloodPressureViewModel,
+  bloodPressureViewModel: BloodPressureViewModel,
+  appointmentViewModel: AppointmentViewModel,
   onAddReading: () -> Unit,
 ) {
-  val readings = viewModel.readings.value
+  val readings = bloodPressureViewModel.readings.value
   val scrollState = rememberScrollState()
 
   AppScaffold(component = component) { paddingValues ->
@@ -45,7 +48,7 @@ fun DashboardScreen(
           horizontalArrangement = Arrangement.Center,
         ) {
           item {
-            val latest = viewModel.getLatestReading()
+            val latest = bloodPressureViewModel.getLatestReading()
             StatCard(
               "Latest Reading",
               if (latest != null) "${latest.systolic}/${latest.diastolic}" else "No data",
@@ -83,30 +86,60 @@ fun DashboardScreen(
         //                }
         //            }
 
-        Card(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
-          Column(modifier = Modifier.padding(16.dp)) {
-            Text("Blood Pressure Trend", style = MaterialTheme.typography.titleMedium)
-            Spacer(modifier = Modifier.height(8.dp))
-
-            SimpleChart()
-          }
-        }
-
+        // Blood Pressure Trend
+        BloodPressureTrend()
         // Recent Readings Section
-        Card(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
-          Column(modifier = Modifier.padding(16.dp)) {
-            Text("Recent Readings", style = MaterialTheme.typography.titleMedium)
-            Spacer(modifier = Modifier.height(8.dp))
+        RecentReadings(readings)
 
-            if (readings.isEmpty()) {
-              Text("No readings recorded yet", style = MaterialTheme.typography.bodyMedium)
-            } else {
-              readings.take(5).forEach { reading ->
-                ReadingItem(reading)
-                HorizontalDivider()
-              }
-            }
-          }
+        UpcomingAppointments(appointmentViewModel)
+      }
+    }
+  }
+}
+
+@Composable
+fun BloodPressureTrend() {
+  Card(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
+    Column(modifier = Modifier.padding(16.dp)) {
+      Text("Blood Pressure Trend", style = MaterialTheme.typography.titleMedium)
+      Spacer(modifier = Modifier.height(8.dp))
+
+      SimpleChart()
+    }
+  }
+}
+
+@Composable
+fun RecentReadings(readings: List<BPReading>) {
+  Card(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
+    Column(modifier = Modifier.padding(16.dp)) {
+      Text("Recent Readings", style = MaterialTheme.typography.titleMedium)
+      Spacer(modifier = Modifier.height(8.dp))
+
+      if (readings.isEmpty()) {
+        Text("No readings recorded yet", style = MaterialTheme.typography.bodyMedium)
+      } else {
+        readings.take(5).forEach { reading ->
+          ReadingItem(reading)
+          HorizontalDivider()
+        }
+      }
+    }
+  }
+}
+
+@Composable
+fun UpcomingAppointments(appointmentViewModel: AppointmentViewModel) {
+  Card(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
+    Column(modifier = Modifier.padding(16.dp)) {
+      Text("Upcoming Appointments", style = MaterialTheme.typography.titleMedium)
+      Spacer(modifier = Modifier.height(8.dp))
+
+      if (appointmentViewModel.upcomingAppointments.isEmpty()) {
+        Text("No upcoming appointments", style = MaterialTheme.typography.bodyMedium)
+      } else {
+        appointmentViewModel.upcomingAppointments.take(3).forEach { appointment ->
+          ReadOnlyAppointmentItem(appointment)
         }
       }
     }

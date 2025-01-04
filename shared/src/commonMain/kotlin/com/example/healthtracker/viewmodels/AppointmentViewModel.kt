@@ -5,10 +5,18 @@ import androidx.compose.runtime.mutableStateOf
 import com.benasher44.uuid.uuid4
 import com.example.healthtracker.data.Appointment
 import kotlinx.datetime.LocalDate
+import network.chaintech.kmp_date_time_picker.utils.now
 
 class AppointmentViewModel {
   private val _appointments = mutableStateOf<List<Appointment>>(emptyList())
   val appointments: State<List<Appointment>> = _appointments
+
+  val upcomingAppointments: List<Appointment>
+    get() =
+      _appointments.value
+        .filter { it.date >= LocalDate.now() } // Filter future appointments
+        .sortedBy { it.date } // Sort by date
+        .take(3)
 
   fun addAppointment(title: String, date: LocalDate, time: String) {
     val newAppointment =

@@ -107,3 +107,27 @@ fun AppointmentItem(appointment: Appointment, onEditClick: () -> Unit, onDeleteC
     }
   }
 }
+
+@Composable
+fun ReadOnlyAppointmentItem(appointment: Appointment) {
+  Card(
+    modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
+  ) {
+    Row(
+      modifier = Modifier.padding(16.dp).fillMaxWidth(),
+      horizontalArrangement = Arrangement.SpaceBetween,
+      verticalAlignment = Alignment.CenterVertically,
+    ) {
+      Column(modifier = Modifier.weight(1f)) {
+        Text(text = appointment.title, style = MaterialTheme.typography.titleMedium)
+        Text(
+          text = "${appointment.date} at ${appointment.time}",
+          style = MaterialTheme.typography.bodyMedium,
+          color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+      }
+    }
+  }
+}

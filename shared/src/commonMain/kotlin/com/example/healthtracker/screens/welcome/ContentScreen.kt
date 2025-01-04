@@ -18,7 +18,8 @@ fun ContentScreen(component: HealthComponent) {
     Screen.Dashboard ->
       DashboardScreen(
         component = component,
-        viewModel = component.viewBloodPressureModel,
+        bloodPressureViewModel = component.viewBloodPressureModel,
+        appointmentViewModel = component.appointmentViewModel,
         onAddReading = { component.navigateTo(Screen.BloodPressureTracker) },
       )
     Screen.BloodPressureTracker ->
