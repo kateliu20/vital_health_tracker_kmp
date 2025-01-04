@@ -4,16 +4,17 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import com.benasher44.uuid.uuid4
 import com.example.healthtracker.data.Appointment
+import kotlinx.datetime.LocalTime
 
 class AppointmentViewModel {
   private val _appointments = mutableStateOf<List<Appointment>>(emptyList())
   val appointments: State<List<Appointment>> = _appointments
 
-  fun addAppointment(title: String, time: Long) {
+  fun addAppointment(title: String, time: String) {
     val newAppointment = Appointment(
       id = uuid4().toString(),
       title = title,
-      date = time
+      time = time
     )
 
     _appointments.value += newAppointment

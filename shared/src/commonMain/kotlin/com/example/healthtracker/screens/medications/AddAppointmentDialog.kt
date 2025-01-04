@@ -18,20 +18,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
 import network.chaintech.kmp_date_time_picker.ui.timepicker.WheelTimePickerView
 import network.chaintech.kmp_date_time_picker.utils.DateTimePickerView
+import network.chaintech.kmp_date_time_picker.utils.TimeFormat
 
 @Composable
 fun AddAppointmentDialog(
-  selectedDate: LocalDate,
   onDismiss: () -> Unit,
-  onConfirm: (title: String) -> Unit,
+  onConfirm: (title: String, time: LocalTime) -> Unit,
 ) {
   var title by remember { mutableStateOf("") }
   var showTimePicker by remember { mutableStateOf(false) }
   var selectedTime by remember { mutableStateOf<LocalTime?>(null) }
+  val formattedTime = formatAppointmentTime(selectedTime)
 
   AlertDialog(
     onDismissRequest = onDismiss,
@@ -53,7 +53,7 @@ fun AddAppointmentDialog(
           modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
         ) {
           Text(
-            selectedTime?.let { "Appointment time: $it" } ?: "Select Time",
+            text = formattedTime,
             textDecoration = TextDecoration.Underline,
             fontSize = 18.sp,
             fontWeight = FontWeight.Medium,
@@ -63,7 +63,7 @@ fun AddAppointmentDialog(
     },
     confirmButton = {
       TextButton(
-        onClick = { onConfirm(title) },
+        onClick = { selectedTime?.let { onConfirm(title, it) } },
         enabled = title.isNotBlank() && selectedTime != null,
       ) {
         Text("Add")
@@ -77,6 +77,7 @@ fun AddAppointmentDialog(
       showTimePicker = true,
       rowCount = 5,
       height = 170.dp,
+      timeFormat = TimeFormat.AM_PM,
       dateTimePickerView = DateTimePickerView.BOTTOM_SHEET_VIEW,
       onDismiss = { showTimePicker = false },
       onDoneClick = { time ->
@@ -85,4 +86,13 @@ fun AddAppointmentDialog(
       },
     )
   }
+}
+
+fun formatAppointmentTime(selectedTime: LocalTime?): String {
+  return selectedTime?.let { time ->
+    val hour = if (time.hour > 12) time.hour - 12 else if (time.hour == 0) 12 else time.hour
+    val amPm = if (time.hour >= 12) "PM" else "AM"
+    val minute = time.minute.toString().padStart(2, '0')
+    "$hour:$minute $amPm"
+  } ?: "Select Time"
 }

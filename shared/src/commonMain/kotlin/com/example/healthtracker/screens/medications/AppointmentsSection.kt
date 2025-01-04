@@ -29,6 +29,7 @@ import com.example.healthtracker.data.Appointment
 import com.example.healthtracker.viewmodels.AppointmentViewModel
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
@@ -39,14 +40,7 @@ fun AppointmentsSection(
   onAddClick: () -> Unit = { /* Handle new appointment */ },
 ) {
   var showAddDialog by remember { mutableStateOf(false) }
-  val appointmentsForDay =
-    viewModel.appointments.value.filter { appointment ->
-      val appointmentDate =
-        Instant.fromEpochMilliseconds(appointment.date)
-          .toLocalDateTime(TimeZone.currentSystemDefault())
-          .date
-      appointmentDate == selectedDate
-    }
+  val appointmentsForDay = viewModel.appointments.value
   Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
     Text(
       "Appointments",
@@ -81,10 +75,12 @@ fun AppointmentsSection(
 
     if (showAddDialog) {
       AddAppointmentDialog(
-        selectedDate = selectedDate,
         onDismiss = { showAddDialog = false },
-        onConfirm = { title ->
-          viewModel.addAppointment(title)
+        onConfirm = { title, time ->
+          viewModel.addAppointment(
+            title = title,
+            time = formatAppointmentTime(time)
+          )
           showAddDialog = false
         },
       )
@@ -106,23 +102,17 @@ fun AppointmentItem(appointment: Appointment, onEditClick: () -> Unit, onDeleteC
       Column(modifier = Modifier.weight(1f)) {
         Text(text = appointment.title, style = MaterialTheme.typography.titleMedium)
         Text(
-          text = formatAppointmentTime(appointment.date),
+          text = appointment.time,
           style = MaterialTheme.typography.bodyMedium,
           color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
       }
 
       Row {
-        IconButton(onClick = onEditClick) { Icon(Icons.Default.Edit, "Edit") }
+//        IconButton(onClick = onEditClick) { Icon(Icons.Default.Edit, "Edit") }
         IconButton(onClick = onDeleteClick) { Icon(Icons.Default.Delete, "Delete") }
       }
     }
   }
 }
 
-fun formatAppointmentTime(timestamp: Long): String {
-  return Instant.fromEpochMilliseconds(timestamp)
-    .toLocalDateTime(TimeZone.currentSystemDefault())
-    .time
-    .toString()
-}
