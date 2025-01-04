@@ -46,6 +46,7 @@ kotlin {
       implementation(libs.kotlinx.datetime)
       implementation(libs.koalaplot.core)
       implementation(compose.components.resources)
+      implementation(libs.kmp.date.time.picker)
     }
     commonTest.dependencies { implementation(libs.kotlin.test) }
   }
