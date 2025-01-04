@@ -44,7 +44,6 @@ fun MedicationScreen(
     AddMedicationDialog(
       onDismiss = { showAddDialog = false },
       onSave = { medication ->
-        println("Saving medication: ${medication.name}")
         medicationViewModel.addMedication(medication)
         showAddDialog = false
       },
