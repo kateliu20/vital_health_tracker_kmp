@@ -8,6 +8,16 @@ class AppointmentViewModel {
   private val _appointments = mutableStateOf<List<Appointment>>(emptyList())
   val appointments: State<List<Appointment>> = _appointments
 
+  fun addAppointment(title: String) {
+
+    val newAppointment = Appointment(
+      id = "hello",
+      title = title,
+      date = 111
+    )
+
+    _appointments.value = _appointments.value + newAppointment
+  }
   fun deleteAppointment(appointment: Appointment) {
     _appointments.value = _appointments.value.filter { it.id != appointment.id }
   }

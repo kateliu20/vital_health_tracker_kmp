@@ -25,10 +25,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.healthtracker.data.Medication
+import com.example.healthtracker.data.MedicationFrequency
 import com.example.healthtracker.data.MedicationType
 import kotlinx.datetime.LocalTime
 
@@ -39,9 +41,11 @@ fun AddMedicationDialog(onDismiss: () -> Unit, onSave: (Medication) -> Unit) {
   var selectedUnit by remember { mutableStateOf("pills") }
   var type by remember { mutableStateOf(MedicationType.PRESCRIPTION) }
   var schedules by remember { mutableStateOf(listOf<LocalTime>()) }
+  var frequency by remember { mutableStateOf(MedicationFrequency.Custom) }
 
   // State for dropdowns
   var unitExpanded by remember { mutableStateOf(false) }
+  var frequencyExpanded by remember { mutableStateOf(false) }
 
   AlertDialog(
     onDismissRequest = onDismiss,
@@ -71,7 +75,6 @@ fun AddMedicationDialog(onDismiss: () -> Unit, onSave: (Medication) -> Unit) {
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             placeholder = { Text("Dosage") },
           )
-
           Box(modifier = Modifier.width(96.dp)) {
             OutlinedTextField(
               value = selectedUnit,
@@ -104,9 +107,47 @@ fun AddMedicationDialog(onDismiss: () -> Unit, onSave: (Medication) -> Unit) {
             }
           }
         }
+        // Frequency selection
+        Box(
+          modifier =
+            Modifier.clickable { frequencyExpanded = !frequencyExpanded }
+              .fillMaxWidth()
+              .padding(vertical = 8.dp)
+        ) {
+          Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+          ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+              Text(frequency.displayText ?: "Does not repeat")
+              Icon(
+                imageVector =
+                  if (frequencyExpanded) Icons.Default.KeyboardArrowUp
+                  else Icons.Default.KeyboardArrowDown,
+                contentDescription = "Select frequency",
+              )
+            }
+          }
+        }
 
-        // TODO: Add DatePicker for date selection
-        // TODO: Add TimePicker for schedule selection
+        if (frequencyExpanded) {
+          DropdownMenu(
+            expanded = frequencyExpanded,
+            onDismissRequest = { frequencyExpanded = false },
+            modifier = Modifier.fillMaxWidth(),
+          ) {
+            MedicationFrequency.values().forEach { freq ->
+              DropdownMenuItem(
+                text = { Text(freq.displayText) },
+                onClick = {
+                  frequency = freq
+                  frequencyExpanded = false
+                },
+              )
+            }
+          }
+        }
       }
     },
     confirmButton = {
@@ -116,8 +157,8 @@ fun AddMedicationDialog(onDismiss: () -> Unit, onSave: (Medication) -> Unit) {
             Medication(
               name = name,
               dosage = "$dosage $selectedUnit",
-              schedule = schedules,
               type = type,
+              frequency = frequency,
             )
           onSave(medication)
           onDismiss()
