@@ -9,7 +9,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -27,20 +26,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.healthtracker.data.Appointment
 import com.example.healthtracker.viewmodels.AppointmentViewModel
-import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.LocalTime
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 
 @Composable
-fun AppointmentsSection(
-  viewModel: AppointmentViewModel,
-  selectedDate: LocalDate,
-  onAddClick: () -> Unit = { /* Handle new appointment */ },
-) {
+fun AppointmentsSection(viewModel: AppointmentViewModel, selectedDate: LocalDate) {
   var showAddDialog by remember { mutableStateOf(false) }
-  val appointmentsForDay = viewModel.appointments.value
+  val appointmentsForDay = viewModel.appointments.value.filter { it.date == selectedDate }
   Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
     Text(
       "Appointments",
@@ -76,10 +67,11 @@ fun AppointmentsSection(
     if (showAddDialog) {
       AddAppointmentDialog(
         onDismiss = { showAddDialog = false },
-        onConfirm = { title, time ->
+        onConfirm = { title, selectedDate, time ->
           viewModel.addAppointment(
             title = title,
-            time = formatAppointmentTime(time)
+            date = selectedDate,
+            time = formatAppointmentTime(time),
           )
           showAddDialog = false
         },
@@ -109,10 +101,9 @@ fun AppointmentItem(appointment: Appointment, onEditClick: () -> Unit, onDeleteC
       }
 
       Row {
-//        IconButton(onClick = onEditClick) { Icon(Icons.Default.Edit, "Edit") }
+        //        IconButton(onClick = onEditClick) { Icon(Icons.Default.Edit, "Edit") }
         IconButton(onClick = onDeleteClick) { Icon(Icons.Default.Delete, "Delete") }
       }
     }
   }
 }
-

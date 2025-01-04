@@ -18,18 +18,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
 import network.chaintech.kmp_date_time_picker.ui.timepicker.WheelTimePickerView
 import network.chaintech.kmp_date_time_picker.utils.DateTimePickerView
 import network.chaintech.kmp_date_time_picker.utils.TimeFormat
+import network.chaintech.kmp_date_time_picker.utils.now
 
 @Composable
 fun AddAppointmentDialog(
   onDismiss: () -> Unit,
-  onConfirm: (title: String, time: LocalTime) -> Unit,
+  onConfirm: (title: String, date: LocalDate, time: LocalTime) -> Unit,
 ) {
   var title by remember { mutableStateOf("") }
   var showTimePicker by remember { mutableStateOf(false) }
+  var selectedDate by remember { mutableStateOf(LocalDate.now()) }
   var selectedTime by remember { mutableStateOf<LocalTime?>(null) }
   val formattedTime = formatAppointmentTime(selectedTime)
 
@@ -63,7 +66,7 @@ fun AddAppointmentDialog(
     },
     confirmButton = {
       TextButton(
-        onClick = { selectedTime?.let { onConfirm(title, it) } },
+        onClick = { selectedTime?.let { onConfirm(title, selectedDate, it) } },
         enabled = title.isNotBlank() && selectedTime != null,
       ) {
         Text("Add")
