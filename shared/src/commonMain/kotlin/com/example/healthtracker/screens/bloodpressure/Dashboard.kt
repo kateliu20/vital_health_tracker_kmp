@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.example.healthtracker.HealthComponent
 import com.example.healthtracker.data.BPReading
 import com.example.healthtracker.screens.AppScaffold
-import com.example.healthtracker.screens.medications.ReadOnlyAppointmentItem
+import com.example.healthtracker.screens.appointments.ReadOnlyAppointmentItem
 import com.example.healthtracker.viewmodels.AppointmentViewModel
 import com.example.healthtracker.viewmodels.BloodPressureViewModel
 
@@ -33,7 +33,7 @@ fun DashboardScreen(
     Scaffold(
       topBar = {
         TopAppBar(
-          title = { Text("BP Dashboard") },
+          title = { Text("Your Health Dashboard") },
           actions = {
             IconButton(onClick = onAddReading) {
               Icon(imageVector = Icons.Default.Add, contentDescription = "Add reading")
@@ -86,10 +86,11 @@ fun DashboardScreen(
         //                }
         //            }
 
+
         // Blood Pressure Trend
-        BloodPressureTrend()
+        BloodPressureTrend(bloodPressureViewModel)
         // Recent Readings Section
-        RecentReadings(readings)
+        //        RecentReadings(readings)
 
         UpcomingAppointments(appointmentViewModel)
       }
@@ -98,13 +99,26 @@ fun DashboardScreen(
 }
 
 @Composable
-fun BloodPressureTrend() {
+fun BloodPressureTrend(bloodPressureViewModel: BloodPressureViewModel) {
   Card(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
     Column(modifier = Modifier.padding(16.dp)) {
-      Text("Blood Pressure Trend", style = MaterialTheme.typography.titleMedium)
+      Text("Recent Blood Pressure Trends", style = MaterialTheme.typography.titleMedium)
       Spacer(modifier = Modifier.height(8.dp))
 
-      SimpleChart()
+      // Get the readings and check if they're not empty
+      val systolicReadings = bloodPressureViewModel.getSystolicReadings()
+      val diastolicReadings = bloodPressureViewModel.getDiastolicReadings()
+
+      if (systolicReadings.isNotEmpty() && diastolicReadings.isNotEmpty()) {
+        BloodPressurePlot(title = "blood pressure over time", systolicReadings, diastolicReadings)
+      } else {
+        // Show a message when no data is available
+        Text(
+          text = "No blood pressure readings available",
+          style = MaterialTheme.typography.bodyLarge,
+          modifier = Modifier.padding(16.dp),
+        )
+      }
     }
   }
 }
@@ -113,7 +127,7 @@ fun BloodPressureTrend() {
 fun RecentReadings(readings: List<BPReading>) {
   Card(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
     Column(modifier = Modifier.padding(16.dp)) {
-      Text("Recent Readings", style = MaterialTheme.typography.titleMedium)
+      Text("Recent Blood Pressure Readings", style = MaterialTheme.typography.titleMedium)
       Spacer(modifier = Modifier.height(8.dp))
 
       if (readings.isEmpty()) {
@@ -166,9 +180,6 @@ private fun ReadingItem(reading: BPReading) {
   ) {
     Text("${reading.systolic}/${reading.diastolic}", style = MaterialTheme.typography.titleMedium)
 
-    Text(
-      "Today", // Replace with actual date formatting
-      style = MaterialTheme.typography.bodyMedium,
-    )
+    Text("Today", style = MaterialTheme.typography.bodyMedium)
   }
 }

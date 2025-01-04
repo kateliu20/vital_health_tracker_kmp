@@ -6,21 +6,18 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.DateRange
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import com.example.healthtracker.HealthComponent
 import com.example.healthtracker.navigation.NavItem
 import com.example.healthtracker.navigation.Screen
 
 @Composable
-fun BottomNavigationBar(
-  modifier: Modifier = Modifier,
-  component: HealthComponent,
-  onScreenChanged: (Screen) -> Unit,
-) {
+fun BottomNavigationBar(component: HealthComponent, onScreenChanged: (Screen) -> Unit) {
   val navItemList =
     listOf(
       NavItem("Home", Icons.Default.Home, Screen.WelcomeScreen),
@@ -36,6 +33,13 @@ fun BottomNavigationBar(
         onClick = { onScreenChanged(navItem.screen) },
         icon = { Icon(imageVector = navItem.icon, contentDescription = navItem.label) },
         label = { Text(text = navItem.label) },
+        colors =
+          NavigationBarItemDefaults.colors(
+            selectedIconColor = MaterialTheme.colorScheme.primary,
+            selectedTextColor = MaterialTheme.colorScheme.primary,
+            unselectedIconColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
+            unselectedTextColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
+          ),
       )
     }
   }

@@ -1,4 +1,4 @@
-package com.example.healthtracker.screens.medications
+package com.example.healthtracker.screens.appointments
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

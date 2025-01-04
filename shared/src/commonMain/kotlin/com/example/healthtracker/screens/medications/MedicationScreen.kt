@@ -8,9 +8,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import com.example.healthtracker.HealthComponent
 import com.example.healthtracker.screens.AppScaffold
+import com.example.healthtracker.screens.appointments.WeeklyCalendarView
 import com.example.healthtracker.viewmodels.AppointmentViewModel
 import com.example.healthtracker.viewmodels.MedicationViewModel
-import kotlinx.datetime.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
