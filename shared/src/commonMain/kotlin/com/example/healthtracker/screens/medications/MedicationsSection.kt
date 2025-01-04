@@ -11,16 +11,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.healthtracker.viewmodels.MedicationViewModel
-import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 
 @Composable
 fun MedicationsSection(viewModel: MedicationViewModel, selectedDate: LocalDate) {
@@ -32,10 +27,7 @@ fun MedicationsSection(viewModel: MedicationViewModel, selectedDate: LocalDate) 
 
   if (viewModel.medications.isNotEmpty()) {
     LazyColumn(
-      modifier = Modifier
-        .fillMaxWidth()
-        .height(200.dp)
-        .padding(horizontal = 16.dp),
+      modifier = Modifier.fillMaxWidth().height(200.dp).padding(horizontal = 16.dp),
       verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
       items(viewModel.medications) { medication ->
@@ -47,16 +39,8 @@ fun MedicationsSection(viewModel: MedicationViewModel, selectedDate: LocalDate) 
       }
     }
   } else {
-    Box(
-      modifier = Modifier
-        .fillMaxWidth()
-        .padding(16.dp),
-      contentAlignment = Alignment.Center
-    ) {
-      Text(
-        "No medications",
-        style = MaterialTheme.typography.bodyMedium
-      )
+    Box(modifier = Modifier.fillMaxWidth().padding(16.dp), contentAlignment = Alignment.Center) {
+      Text("No medications", style = MaterialTheme.typography.bodyMedium)
     }
   }
 }

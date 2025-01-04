@@ -31,11 +31,11 @@ fun MedicationItem(medication: Medication, onEditClick: () -> Unit, onDeleteClic
         text = "${medication.dosage} - ${medication.type}",
         style = MaterialTheme.typography.bodyMedium,
       )
-      // Schedule display
-      Text(
-        text = "Times: ${medication.schedule.joinToString { it.toString() }}",
-        style = MaterialTheme.typography.bodySmall,
-      )
+      //      // Schedule display
+      //      Text(
+      //        text = "Times: ${medication.schedule.joinToString { it.toString() }}",
+      //        style = MaterialTheme.typography.bodySmall,
+      //      )
     }
 
     Row {

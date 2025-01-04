@@ -25,13 +25,9 @@ fun WeeklyCalendarView(
 
   Column(modifier = Modifier.fillMaxSize()) {
     WeekHeader(selectedDate) { newDate -> selectedDate = newDate }
-    AppointmentsSection(
-      viewModel = appointmentViewModel,
-      selectedDate = selectedDate)
+    AppointmentsSection(viewModel = appointmentViewModel, selectedDate = selectedDate)
 
-    MedicationsSection(
-      viewModel = medicationViewModel,
-      selectedDate = selectedDate)
+    MedicationsSection(viewModel = medicationViewModel, selectedDate = selectedDate)
   }
 }
 
