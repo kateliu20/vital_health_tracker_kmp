@@ -11,8 +11,6 @@ koalaplot = "0.7.0"
 coreI18n = "1.0.0-alpha01"
 date-time = "1.0.7"
 uiud = "0.8.4"
-androidx-lifecycle = "2.8.3"
-kotlinx-serialization-json = "1.6.3"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -38,5 +36,3 @@ kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = 
 kotlin-plugin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
-kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-
