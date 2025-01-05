@@ -44,7 +44,7 @@ fun AppointmentsSection(viewModel: AppointmentViewModel, selectedDate: LocalDate
         items(appointmentsForDay) { appointment ->
           AppointmentItem(
             appointment = appointment,
-            onEditClick = { /* TODO */ },
+//            onEditClick = { /* TODO */ },
             onDeleteClick = { viewModel.deleteAppointment(appointment) },
           )
         }
@@ -81,7 +81,7 @@ fun AppointmentsSection(viewModel: AppointmentViewModel, selectedDate: LocalDate
 }
 
 @Composable
-fun AppointmentItem(appointment: Appointment, onEditClick: () -> Unit, onDeleteClick: () -> Unit) {
+fun AppointmentItem(appointment: Appointment, onDeleteClick: () -> Unit) {
   Card(
     modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
     elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
