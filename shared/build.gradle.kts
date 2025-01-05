@@ -6,6 +6,7 @@ plugins {
   alias(libs.plugins.compose)
   alias(libs.plugins.kotlin.plugin.compose)
   alias(libs.plugins.spotless)
+  alias(libs.plugins.kotlinSerialization)
 }
 
 spotless {
@@ -43,6 +44,7 @@ kotlin {
       implementation(compose.foundation)
       implementation(compose.material3)
       implementation(compose.ui)
+
       implementation(libs.kotlinx.datetime)
       implementation(libs.koalaplot.core)
       implementation(compose.components.resources)

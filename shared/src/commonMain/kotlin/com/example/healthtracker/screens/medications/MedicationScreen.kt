@@ -1,8 +1,6 @@
 package com.example.healthtracker.screens.medications
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -23,18 +21,19 @@ fun MedicationScreen(
 
   AppScaffold(component = component) { paddingValues ->
     Scaffold(
-      topBar = {
-        TopAppBar(
-          title = { Text("Medications") },
-          actions = {
-            IconButton(onClick = { showAddDialog = true }) {
-              Icon(Icons.Default.Add, contentDescription = "Add Medication")
-            }
-          },
-        )
-      }
+      // topBar = {
+      //     TopAppBar(
+      //         title = { Text("Medications") },
+      //         actions = {
+      //             IconButton(onClick = { showAddDialog = true }) {
+      //                 Icon(Icons.Default.Add, contentDescription = "Add Medication")
+      //             }
+      //         },
+      //     )
+      // }
     ) { topBarPadding ->
-      Column(modifier = Modifier.fillMaxSize().padding(paddingValues).padding(topBarPadding)) {
+      // Adjust padding to avoid double padding
+      Column(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
         WeeklyCalendarView(medicationViewModel, appointmentViewModel)
       }
     }

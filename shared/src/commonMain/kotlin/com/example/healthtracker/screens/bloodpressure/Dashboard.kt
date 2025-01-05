@@ -4,8 +4,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -26,23 +24,23 @@ fun DashboardScreen(
   appointmentViewModel: AppointmentViewModel,
   onAddReading: () -> Unit,
 ) {
-  val readings = bloodPressureViewModel.readings.value
   val scrollState = rememberScrollState()
 
   AppScaffold(component = component) { paddingValues ->
     Scaffold(
       topBar = {
         TopAppBar(
-          title = { Text("Your Health Dashboard") },
-          actions = {
-            IconButton(onClick = onAddReading) {
-              Icon(imageVector = Icons.Default.Add, contentDescription = "Add reading")
-            }
-          },
+          title = { Text("Your Health Dashboard") }
+          //          actions = {
+          //            IconButton(onClick = onAddReading) {
+          //              Icon(imageVector = Icons.Default.Add, contentDescription = "Add reading")
+          //            }
+          //          },
         )
       }
     ) { paddingValues ->
       Column(modifier = Modifier.fillMaxSize().padding(paddingValues).verticalScroll(scrollState)) {
+        // Latest Reading Card
         LazyRow(
           modifier = Modifier.fillMaxWidth().padding(8.dp),
           horizontalArrangement = Arrangement.Center,
@@ -50,48 +48,17 @@ fun DashboardScreen(
           item {
             val latest = bloodPressureViewModel.getLatestReading()
             StatCard(
-              "Latest Reading",
-              if (latest != null) "${latest.systolic}/${latest.diastolic}" else "No data",
+              title = "Latest Blood Pressure Reading",
+              value = if (latest != null) "${latest.systolic}/${latest.diastolic}" else "No data",
+              onAddClick = { onAddReading() },
             )
           }
         }
 
-        // Blood Pressure Graph Card
-        //            Card(
-        //                modifier = Modifier
-        //                    .fillMaxWidth()
-        //                    .padding(8.dp)
-        //            ) {
-        //                Column(
-        //                    modifier = Modifier
-        //                        .padding(16.dp)
-        //                ) {
-        //                    Text(
-        //                        "Blood Pressure Trend",
-        //                        style = MaterialTheme.typography.titleMedium
-        //                    )
-        //                    Spacer(modifier = Modifier.height(8.dp))
-        //
-        //                    BloodPressureGraph(
-        //                        readings = readings.map {
-        //                            BloodPressureReading(
-        //                                systolic = it.systolic,
-        //                                diastolic = it.diastolic
-        //                            )
-        //                        },
-        //                        modifier = Modifier
-        //                            .fillMaxWidth()
-        //                            .height(200.dp)
-        //                    )
-        //                }
-        //            }
-
-
         // Blood Pressure Trend
         BloodPressureTrend(bloodPressureViewModel)
-        // Recent Readings Section
-        //        RecentReadings(readings)
 
+        // Upcoming Appointments
         UpcomingAppointments(appointmentViewModel)
       }
     }
@@ -110,7 +77,7 @@ fun BloodPressureTrend(bloodPressureViewModel: BloodPressureViewModel) {
       val diastolicReadings = bloodPressureViewModel.getDiastolicReadings()
 
       if (systolicReadings.isNotEmpty() && diastolicReadings.isNotEmpty()) {
-        BloodPressurePlot(title = "blood pressure over time", systolicReadings, diastolicReadings)
+        BloodPressurePlot(title = "Blood Pressure Trend", systolicReadings, diastolicReadings)
       } else {
         // Show a message when no data is available
         Text(
@@ -161,12 +128,38 @@ fun UpcomingAppointments(appointmentViewModel: AppointmentViewModel) {
 }
 
 @Composable
-private fun StatCard(title: String, value: String) {
-  Card(modifier = Modifier.width(160.dp)) {
-    Column(modifier = Modifier.padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-      Text(text = title, style = MaterialTheme.typography.bodyMedium)
+private fun StatCard(title: String, value: String, onAddClick: (() -> Unit)? = null) {
+  Card(
+    modifier = Modifier.padding(8.dp), // Add margin around the card
+    shape = MaterialTheme.shapes.medium,
+    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+  ) {
+    Column(
+      modifier = Modifier.padding(16.dp).fillMaxWidth(),
+      horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+      Text(
+        text = title,
+        style = MaterialTheme.typography.bodyMedium,
+        color = MaterialTheme.colorScheme.primary,
+        modifier = Modifier.padding(bottom = 8.dp),
+      )
       Spacer(modifier = Modifier.height(4.dp))
-      Text(text = value, style = MaterialTheme.typography.titleLarge)
+      Text(
+        text = value,
+        style = MaterialTheme.typography.bodyLarge,
+        color = MaterialTheme.colorScheme.onSurface,
+      )
+
+      if (onAddClick != null) {
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(
+          onClick = onAddClick,
+          modifier = Modifier.fillMaxWidth(0.6f), // Center and size the button proportionally
+        ) {
+          Text("Add Entry")
+        }
+      }
     }
   }
 }

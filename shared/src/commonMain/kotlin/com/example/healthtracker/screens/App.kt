@@ -8,4 +8,5 @@ import com.example.healthtracker.screens.welcome.ContentScreen
 fun app(component: HealthComponent) {
   //    WeeklyCalendarView(component = component)
   ContentScreen(component = component)
+  //  ScrollableChartScreen()
 }
