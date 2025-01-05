@@ -50,7 +50,7 @@ kotlin {
       implementation(libs.kmp.date.time.picker)
       implementation(libs.kmp.uiud)
 
-      implementation(libs.compose.webview.multiplatform)
+      api(libs.compose.webview.multiplatform)
     }
     commonTest.dependencies { implementation(libs.kotlin.test) }
   }

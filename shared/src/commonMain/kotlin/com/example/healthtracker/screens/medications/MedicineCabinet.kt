@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -31,7 +30,6 @@ import com.example.healthtracker.data.Medication
 import com.example.healthtracker.screens.AppScaffold
 import health_tracker.shared.generated.resources.Res
 import health_tracker.shared.generated.resources.medicine
-import health_tracker.shared.generated.resources.vital
 import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -65,7 +63,7 @@ fun MedicineCabinetScreen(
           Image(
             painter = painterResource(Res.drawable.medicine),
             contentDescription = "Medication",
-            modifier = Modifier.fillMaxWidth().padding(16.dp)
+            modifier = Modifier.fillMaxWidth().padding(16.dp),
           )
           Text(
             text = "No medications in the cabinet right now",

@@ -26,7 +26,7 @@ fun DashboardScreen(
 ) {
   val scrollState = rememberScrollState()
 
-  AppScaffold(component = component) { paddingValues ->
+  AppScaffold(component = component) {
     Scaffold(
       topBar = {
         TopAppBar(
@@ -38,8 +38,8 @@ fun DashboardScreen(
           //          },
         )
       }
-    ) { paddingValues ->
-      Column(modifier = Modifier.fillMaxSize().padding(paddingValues).verticalScroll(scrollState)) {
+    ) { innerPadding ->
+      Column(modifier = Modifier.fillMaxSize().padding(innerPadding).verticalScroll(scrollState)) {
         // Latest Reading Card
         LazyRow(
           modifier = Modifier.fillMaxWidth().padding(8.dp),
@@ -110,7 +110,7 @@ fun RecentReadings(readings: List<BPReading>) {
 
 @Composable
 fun UpcomingAppointments(appointmentViewModel: AppointmentViewModel) {
-  Card(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
+  Card(modifier = Modifier.fillMaxWidth().padding(8.dp).padding(bottom = 64.dp)) {
     Column(modifier = Modifier.padding(16.dp)) {
       Text("Upcoming Appointments", style = MaterialTheme.typography.titleMedium)
       Spacer(modifier = Modifier.height(8.dp))

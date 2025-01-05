@@ -45,7 +45,7 @@ fun AppointmentsSection(viewModel: AppointmentViewModel, selectedDate: LocalDate
         items(appointmentsForDay) { appointment ->
           AppointmentItem(
             appointment = appointment,
-//            onEditClick = { /* TODO */ },
+            //            onEditClick = { /* TODO */ },
             onDeleteClick = { viewModel.deleteAppointment(appointment) },
           )
         }
