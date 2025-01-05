@@ -3,9 +3,10 @@ package com.example.healthtracker.screens.welcome
 import androidx.compose.runtime.Composable
 import com.example.healthtracker.HealthComponent
 import com.example.healthtracker.navigation.Screen
+import com.example.healthtracker.screens.appointments.AppointmentScreen
 import com.example.healthtracker.screens.bloodpressure.BloodPressureTrackerScreen
 import com.example.healthtracker.screens.bloodpressure.DashboardScreen
-import com.example.healthtracker.screens.medications.MedicationScreen
+import com.example.healthtracker.screens.medications.MedicineCabinetScreen
 
 @Composable
 fun ContentScreen(component: HealthComponent) {
@@ -28,11 +29,22 @@ fun ContentScreen(component: HealthComponent) {
         viewModel = component.viewBloodPressureModel,
         onBackClick = { component.navigateTo(Screen.Dashboard) },
       )
-    Screen.MedicationScreen ->
-      MedicationScreen(
+    Screen.AppointmentScreen ->
+      AppointmentScreen(
         component = component,
         medicationViewModel = component.viewMedicationModel,
         appointmentViewModel = component.appointmentViewModel,
+      )
+    Screen.MedicineCabinetScreen ->
+      MedicineCabinetScreen(
+        component = component,
+        onAddMedication = {},
+        //        onAddMedication = {
+        //          component.navigateTo(Screen.AddMedicationScreen)
+        //        },
+        //        onEditMedication = { medication ->
+        //          component.navigateTo(Screen.EditMedicationScreen(medication))
+        //        }
       )
   }
 }

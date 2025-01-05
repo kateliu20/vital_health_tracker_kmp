@@ -1,7 +1,7 @@
 package com.example.healthtracker.screens.welcome
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.DateRange
@@ -22,8 +22,9 @@ fun BottomNavigationBar(component: HealthComponent, onScreenChanged: (Screen) ->
     listOf(
       NavItem("Home", Icons.Default.Home, Screen.WelcomeScreen),
       NavItem("Dashboard", Icons.Default.Menu, Screen.Dashboard),
-      NavItem("Add Data", Icons.Default.Add, Screen.BloodPressureTracker),
-      NavItem("Calendar", Icons.Outlined.DateRange, Screen.MedicationScreen),
+      //      NavItem("Add Data", Icons.Default.Add, Screen.BloodPressureTracker),
+      NavItem("Cabinet", Icons.Default.Favorite, Screen.MedicineCabinetScreen),
+      NavItem("Calendar", Icons.Outlined.DateRange, Screen.AppointmentScreen),
     )
 
   NavigationBar {

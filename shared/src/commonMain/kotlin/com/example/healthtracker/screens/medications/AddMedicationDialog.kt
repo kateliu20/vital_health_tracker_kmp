@@ -25,12 +25,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.benasher44.uuid.uuid4
 import com.example.healthtracker.data.Medication
-import com.example.healthtracker.data.MedicationFrequency
 import com.example.healthtracker.data.MedicationType
 import kotlinx.datetime.LocalTime
 
@@ -41,7 +40,7 @@ fun AddMedicationDialog(onDismiss: () -> Unit, onSave: (Medication) -> Unit) {
   var selectedUnit by remember { mutableStateOf("pills") }
   var type by remember { mutableStateOf(MedicationType.PRESCRIPTION) }
   var schedules by remember { mutableStateOf(listOf<LocalTime>()) }
-  var frequency by remember { mutableStateOf(MedicationFrequency.Custom) }
+  //  var frequency by remember { mutableStateOf(MedicationFrequency.Custom) }
 
   // State for dropdowns
   var unitExpanded by remember { mutableStateOf(false) }
@@ -106,48 +105,48 @@ fun AddMedicationDialog(onDismiss: () -> Unit, onSave: (Medication) -> Unit) {
               }
             }
           }
-        }
-        // Frequency selection
-        Box(
-          modifier =
-            Modifier.clickable { frequencyExpanded = !frequencyExpanded }
-              .fillMaxWidth()
-              .padding(vertical = 8.dp)
-        ) {
-          Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
-          ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-              Text(frequency.displayText ?: "Does not repeat")
-              Icon(
-                imageVector =
-                  if (frequencyExpanded) Icons.Default.KeyboardArrowUp
-                  else Icons.Default.KeyboardArrowDown,
-                contentDescription = "Select frequency",
-              )
-            }
-          }
+
+          // Frequency selection
+          //        Box(
+          //          modifier =
+          //            Modifier.clickable { frequencyExpanded = !frequencyExpanded }
+          //              .fillMaxWidth()
+          //              .padding(vertical = 8.dp)
+          //        ) {
+          //          Row(
+          //            modifier = Modifier.fillMaxWidth(),
+          //            verticalAlignment = Alignment.CenterVertically,
+          //            horizontalArrangement = Arrangement.SpaceBetween,
+          //          ) {
+          //            Row(verticalAlignment = Alignment.CenterVertically) {
+          ////              Text(frequency.displayText ?: "Does not repeat")
+          //              Icon(
+          //                imageVector =
+          //                  if (frequencyExpanded) Icons.Default.KeyboardArrowUp
+          //                  else Icons.Default.KeyboardArrowDown,
+          //                contentDescription = "Select frequency",
+          //              )
+          //            }
+          //          }
         }
 
-        if (frequencyExpanded) {
-          DropdownMenu(
-            expanded = frequencyExpanded,
-            onDismissRequest = { frequencyExpanded = false },
-            modifier = Modifier.fillMaxWidth(),
-          ) {
-            MedicationFrequency.values().forEach { freq ->
-              DropdownMenuItem(
-                text = { Text(freq.displayText) },
-                onClick = {
-                  frequency = freq
-                  frequencyExpanded = false
-                },
-              )
-            }
-          }
-        }
+        //        if (frequencyExpanded) {
+        //          DropdownMenu(
+        //            expanded = frequencyExpanded,
+        //            onDismissRequest = { frequencyExpanded = false },
+        //            modifier = Modifier.fillMaxWidth(),
+        //          ) {
+        //            MedicationFrequency.values().forEach { freq ->
+        //              DropdownMenuItem(
+        //                text = { Text(freq.displayText) },
+        //                onClick = {
+        //                  frequency = freq
+        //                  frequencyExpanded = false
+        //                },
+        //              )
+        //            }
+        //          }
+        //        }
       }
     },
     confirmButton = {
@@ -155,10 +154,10 @@ fun AddMedicationDialog(onDismiss: () -> Unit, onSave: (Medication) -> Unit) {
         onClick = {
           val medication =
             Medication(
+              id = uuid4().toString(),
               name = name,
               dosage = "$dosage $selectedUnit",
-              type = type,
-              frequency = frequency,
+              //              frequency = frequency.toString(),
             )
           onSave(medication)
           onDismiss()

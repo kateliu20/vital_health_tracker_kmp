@@ -7,5 +7,7 @@ sealed class Screen {
 
   data object BloodPressureTracker : Screen()
 
-  data object MedicationScreen : Screen()
+  data object AppointmentScreen : Screen()
+
+  data object MedicineCabinetScreen : Screen()
 }
