@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.example.healthtracker.HealthComponent
 import com.example.healthtracker.screens.AppScaffold
 import health_tracker.shared.generated.resources.Res
-import health_tracker.shared.generated.resources.vitro
+import health_tracker.shared.generated.resources.vital
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -28,8 +28,8 @@ fun WelcomeScreen(component: HealthComponent, onNavigateToBloodPressure: () -> U
     ) {
       Text("Welcome to")
       Image(
-        painter = painterResource(Res.drawable.vitro),
-        contentDescription = "Vitro Logo",
+        painter = painterResource(Res.drawable.vital),
+        contentDescription = "Vital Logo",
         modifier = Modifier.fillMaxWidth(),
       )
       Button(onClick = onNavigateToBloodPressure, modifier = Modifier.padding(top = 8.dp)) {
