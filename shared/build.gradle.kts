@@ -6,7 +6,6 @@ plugins {
   alias(libs.plugins.compose)
   alias(libs.plugins.kotlin.plugin.compose)
   alias(libs.plugins.spotless)
-  alias(libs.plugins.kotlinSerialization)
 }
 
 spotless {
@@ -50,6 +49,8 @@ kotlin {
       implementation(compose.components.resources)
       implementation(libs.kmp.date.time.picker)
       implementation(libs.kmp.uiud)
+
+      implementation(libs.compose.webview.multiplatform)
     }
     commonTest.dependencies { implementation(libs.kotlin.test) }
   }
