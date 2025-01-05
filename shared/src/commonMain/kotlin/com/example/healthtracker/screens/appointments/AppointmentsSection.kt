@@ -16,6 +16,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -103,7 +104,10 @@ fun AppointmentItem(appointment: Appointment, onDeleteClick: () -> Unit) {
 
       Row {
         //        IconButton(onClick = onEditClick) { Icon(Icons.Default.Edit, "Edit") }
-        IconButton(onClick = onDeleteClick) { Icon(Icons.Default.Delete, "Delete") }
+        TextButton(onClick =  onDeleteClick) {
+          Text("Delete", color = MaterialTheme.colorScheme.error)
+        }
+//        IconButton(onClick = onDeleteClick) { Icon(Icons.Default.Delete, "Delete") }
       }
     }
   }
