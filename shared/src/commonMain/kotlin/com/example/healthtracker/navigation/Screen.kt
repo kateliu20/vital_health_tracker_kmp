@@ -10,4 +10,6 @@ sealed class Screen {
   data object AppointmentScreen : Screen()
 
   data object MedicineCabinetScreen : Screen()
+
+  data class WebViewScreen(val url: String) : Screen()
 }
