@@ -1,9 +1,12 @@
 package com.example.healthtracker.screens.medications
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -26,6 +29,10 @@ import androidx.compose.ui.unit.dp
 import com.example.healthtracker.HealthComponent
 import com.example.healthtracker.data.Medication
 import com.example.healthtracker.screens.AppScaffold
+import health_tracker.shared.generated.resources.Res
+import health_tracker.shared.generated.resources.medicine
+import health_tracker.shared.generated.resources.vital
+import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -55,8 +62,13 @@ fun MedicineCabinetScreen(
 
       Column(modifier = Modifier.fillMaxSize().padding(paddingValues).padding(16.dp)) {
         if (medications.isEmpty()) {
+          Image(
+            painter = painterResource(Res.drawable.medicine),
+            contentDescription = "Medication",
+            modifier = Modifier.fillMaxWidth().padding(16.dp)
+          )
           Text(
-            text = "No medications available.",
+            text = "No medications in the cabinet right now",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.align(Alignment.CenterHorizontally),
