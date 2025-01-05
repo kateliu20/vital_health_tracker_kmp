@@ -41,6 +41,7 @@ fun AppointmentsSection(viewModel: AppointmentViewModel, selectedDate: LocalDate
 
     if (appointmentsForDay.isNotEmpty()) {
       LazyColumn(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        // TODO: sort appointments in chronological order
         items(appointmentsForDay) { appointment ->
           AppointmentItem(
             appointment = appointment,
