@@ -11,12 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.healthtracker.viewmodels.AppointmentViewModel
-import com.example.healthtracker.viewmodels.MedicationViewModel
 import kotlinx.datetime.*
 
 @Composable
 fun WeeklyCalendarView(
-  medicationViewModel: MedicationViewModel,
   appointmentViewModel: AppointmentViewModel,
 ) {
   var selectedDate by remember {
@@ -26,8 +24,6 @@ fun WeeklyCalendarView(
   Column(modifier = Modifier.fillMaxSize()) {
     WeekHeader(selectedDate) { newDate -> selectedDate = newDate }
     AppointmentsSection(viewModel = appointmentViewModel, selectedDate = selectedDate)
-
-    //    MedicationsSection(viewModel = medicationViewModel, selectedDate = selectedDate)
   }
 }
 

@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.healthtracker.HealthComponent
+import com.example.healthtracker.data.Medication
 import com.example.healthtracker.screens.AppScaffold
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -35,6 +36,7 @@ fun MedicineCabinetScreen(
 ) {
   val medications = component.viewMedicationModel.medications // Observe the list of medications
   var showAddMedicationDialog by remember { mutableStateOf(false) }
+  var medicationToEdit by remember { mutableStateOf<Medication?>(null) }
 
   AppScaffold(component = component) { paddingValues ->
     Scaffold(
@@ -68,13 +70,12 @@ fun MedicineCabinetScreen(
               MedicationCard(
                 medication = medication,
                 onEditMedication = { selectedMedication ->
-                  // Handle editing this medication
-                  println("Edit clicked for ${selectedMedication.name}")
+                  medicationToEdit = selectedMedication // Open the edit dialog
                 },
                 onDeleteMedication = { selectedMedication ->
                   // Handle deleting this medication
                   component.viewMedicationModel.deleteMedication(selectedMedication)
-                  //                  println("Delete clicked for ${selectedMedication.name}")
+                  // println("Delete clicked for ${selectedMedication.name}")
                 },
               )
             }
@@ -84,13 +85,23 @@ fun MedicineCabinetScreen(
     }
   }
 
-  if (showAddMedicationDialog) {
-    AddMedicationDialog(
-      onDismiss = { showAddMedicationDialog = false },
-      onSave = { medication ->
-        component.viewMedicationModel.addMedication(medication)
+  if (showAddMedicationDialog || medicationToEdit != null) {
+    AddOrEditMedicationDialog(
+      medication = medicationToEdit,
+      onDismiss = {
         showAddMedicationDialog = false
+        medicationToEdit = null
       },
+      onSave = { updatedMedication ->
+        if (medicationToEdit == null) {
+          component.viewMedicationModel.addMedication(updatedMedication)
+        } else {
+          component.viewMedicationModel.updateMedication(medicationToEdit!!, updatedMedication)
+        }
+        showAddMedicationDialog = false
+        medicationToEdit = null
+      }
     )
   }
+
 }

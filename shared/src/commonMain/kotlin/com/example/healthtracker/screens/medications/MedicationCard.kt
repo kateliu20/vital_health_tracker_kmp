@@ -37,12 +37,15 @@ fun MedicationCard(
       )
       Spacer(modifier = Modifier.height(4.dp))
       Text(text = "Dosage: ${medication.dosage}", style = MaterialTheme.typography.bodyMedium)
-      //      Text(
-      //        text = "Frequency: ${medication.frequency}",
-      //        style = MaterialTheme.typography.bodySmall,
-      //        color = MaterialTheme.colorScheme.onSurfaceVariant,
-      //      )
       Spacer(modifier = Modifier.height(8.dp))
+      // Display notes
+      if (medication.notes.isNotEmpty()) {
+        Text(
+          text = "Notes: ${medication.notes}",
+          style = MaterialTheme.typography.bodyMedium,
+          modifier = Modifier.padding(top = 4.dp)
+        )
+      }
       Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxWidth()) {
         // Edit Button
         TextButton(onClick = { onEditMedication(medication) }) {

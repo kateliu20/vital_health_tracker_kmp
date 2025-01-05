@@ -72,7 +72,6 @@ fun BloodPressureTrend(bloodPressureViewModel: BloodPressureViewModel) {
       Text("Recent Blood Pressure Trends", style = MaterialTheme.typography.titleMedium)
       Spacer(modifier = Modifier.height(8.dp))
 
-      // Get the readings and check if they're not empty
       val systolicReadings = bloodPressureViewModel.getSystolicReadings()
       val diastolicReadings = bloodPressureViewModel.getDiastolicReadings()
 
@@ -130,7 +129,7 @@ fun UpcomingAppointments(appointmentViewModel: AppointmentViewModel) {
 @Composable
 private fun StatCard(title: String, value: String, onAddClick: (() -> Unit)? = null) {
   Card(
-    modifier = Modifier.padding(8.dp), // Add margin around the card
+    modifier = Modifier.padding(8.dp),
     shape = MaterialTheme.shapes.medium,
     elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
   ) {
@@ -155,7 +154,7 @@ private fun StatCard(title: String, value: String, onAddClick: (() -> Unit)? = n
         Spacer(modifier = Modifier.height(16.dp))
         Button(
           onClick = onAddClick,
-          modifier = Modifier.fillMaxWidth(0.6f), // Center and size the button proportionally
+          modifier = Modifier.fillMaxWidth(0.6f),
         ) {
           Text("Add Entry")
         }
