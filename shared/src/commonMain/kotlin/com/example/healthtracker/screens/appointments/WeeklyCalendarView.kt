@@ -14,9 +14,7 @@ import com.example.healthtracker.viewmodels.AppointmentViewModel
 import kotlinx.datetime.*
 
 @Composable
-fun WeeklyCalendarView(
-  appointmentViewModel: AppointmentViewModel,
-) {
+fun WeeklyCalendarView(appointmentViewModel: AppointmentViewModel) {
   var selectedDate by remember {
     mutableStateOf(Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date)
   }

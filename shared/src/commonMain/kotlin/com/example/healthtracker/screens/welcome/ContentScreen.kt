@@ -32,19 +32,9 @@ fun ContentScreen(component: HealthComponent) {
     Screen.AppointmentScreen ->
       AppointmentScreen(
         component = component,
-        medicationViewModel = component.viewMedicationModel,
         appointmentViewModel = component.appointmentViewModel,
       )
     Screen.MedicineCabinetScreen ->
-      MedicineCabinetScreen(
-        component = component,
-        onAddMedication = {},
-        //        onAddMedication = {
-        //          component.navigateTo(Screen.AddMedicationScreen)
-        //        },
-        //        onEditMedication = { medication ->
-        //          component.navigateTo(Screen.EditMedicationScreen(medication))
-        //        }
-      )
+      MedicineCabinetScreen(component = component, onAddMedication = {})
   }
 }

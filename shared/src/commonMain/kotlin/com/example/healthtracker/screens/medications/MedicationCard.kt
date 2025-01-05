@@ -43,7 +43,7 @@ fun MedicationCard(
         Text(
           text = "Notes: ${medication.notes}",
           style = MaterialTheme.typography.bodyMedium,
-          modifier = Modifier.padding(top = 4.dp)
+          modifier = Modifier.padding(top = 4.dp),
         )
       }
       Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxWidth()) {

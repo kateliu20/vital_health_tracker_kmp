@@ -152,12 +152,7 @@ private fun StatCard(title: String, value: String, onAddClick: (() -> Unit)? = n
 
       if (onAddClick != null) {
         Spacer(modifier = Modifier.height(16.dp))
-        Button(
-          onClick = onAddClick,
-          modifier = Modifier.fillMaxWidth(0.6f),
-        ) {
-          Text("Add Entry")
-        }
+        Button(onClick = onAddClick, modifier = Modifier.fillMaxWidth(0.6f)) { Text("Add Entry") }
       }
     }
   }

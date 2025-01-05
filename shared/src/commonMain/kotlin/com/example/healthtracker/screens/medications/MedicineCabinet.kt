@@ -100,8 +100,7 @@ fun MedicineCabinetScreen(
         }
         showAddMedicationDialog = false
         medicationToEdit = null
-      }
+      },
     )
   }
-
 }
