@@ -3,12 +3,10 @@ package com.example.healthtracker.screens.welcome
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -42,30 +40,28 @@ fun WelcomeScreen(
     ) {
       Text(
         text = "Welcome to",
-        style = MaterialTheme.typography.headlineMedium.copy(
-          fontWeight = FontWeight.Bold,
-                  color = MaterialTheme.colorScheme.primary,
-        ),
-        )
+        style =
+          MaterialTheme.typography.headlineMedium.copy(
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary,
+          ),
+      )
       Image(
         painter = painterResource(Res.drawable.vital),
         contentDescription = "Vital Logo",
         modifier = Modifier.fillMaxWidth(),
       )
-      Button(onClick = onNavigateToBloodPressure, modifier = Modifier.padding(4.dp).height(40.dp)
-      ) {
+      Button(onClick = onNavigateToBloodPressure, modifier = Modifier.padding(4.dp).height(40.dp)) {
         Text("Go to Health Dashboard")
       }
-//      Spacer(modifier = Modifier.height(12.dp))
+      //      Spacer(modifier = Modifier.height(12.dp))
 
       // Articles Section
       LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier
-          .fillMaxSize()
-          .padding(16.dp)
+        modifier = Modifier.fillMaxSize().padding(16.dp),
       ) {
         items(articles) { article ->
           ArticleCard(

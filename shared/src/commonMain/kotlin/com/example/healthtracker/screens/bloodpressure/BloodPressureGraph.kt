@@ -124,20 +124,14 @@ fun BloodPressurePlot(
         Spacer(modifier = Modifier.width(16.dp))
         LegendItem(color = Color.Blue, label = "Diastolic")
       }
-
     }
   }
 }
 
-
 @Composable
 fun LegendItem(color: Color, label: String) {
   Row(verticalAlignment = Alignment.CenterVertically) {
-    Box(
-      modifier = Modifier
-        .size(12.dp)
-        .background(color, shape = CircleShape)
-    )
+    Box(modifier = Modifier.size(12.dp).background(color, shape = CircleShape))
     Spacer(modifier = Modifier.width(8.dp))
     Text(text = label, style = MaterialTheme.typography.bodyMedium)
   }

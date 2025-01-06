@@ -6,6 +6,7 @@ plugins {
   alias(libs.plugins.compose)
   alias(libs.plugins.kotlin.plugin.compose)
   alias(libs.plugins.spotless)
+  alias(libs.plugins.sqldelight)
 }
 
 spotless {

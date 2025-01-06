@@ -19,7 +19,8 @@ val articles =
     Article(
       title = "What your BP Reading Means",
       imageRes = Res.drawable.bp2,
-      url = "https://www.mayoclinic.org/diseases-conditions/high-blood-pressure/in-depth/blood-pressure/art-20050982",
+      url =
+        "https://www.mayoclinic.org/diseases-conditions/high-blood-pressure/in-depth/blood-pressure/art-20050982",
     ),
     Article(
       title = "Prep for the Winter",
