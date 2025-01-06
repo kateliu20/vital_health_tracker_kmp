@@ -44,14 +44,17 @@ kotlin {
       implementation(compose.foundation)
       implementation(compose.material3)
       implementation(compose.ui)
+      implementation(compose.components.resources)
+
+      api(libs.compose.webview.multiplatform)
 
       implementation(libs.kotlinx.datetime)
       implementation(libs.koalaplot.core)
-      implementation(compose.components.resources)
       implementation(libs.kmp.date.time.picker)
       implementation(libs.kmp.uiud)
 
-      api(libs.compose.webview.multiplatform)
+      implementation(libs.sqldelight.coroutines)
+      implementation(libs.sqldelight.async)
     }
     commonTest.dependencies { implementation(libs.kotlin.test) }
   }

@@ -12,7 +12,7 @@ koalaplot = "0.7.0"
 coreI18n = "1.0.0-alpha01"
 date-time = "1.0.7"
 uiud = "0.8.4"
-sqlDelight = "2.0.1"
+sqldelight = "2.0.1"
 
 [libraries]
 compose-webview-multiplatform = { module = "io.github.kevinnzou:compose-webview-multiplatform", version.ref = "composeWebviewMultiplatform" }
@@ -29,6 +29,8 @@ koalaplot-core = { group = "io.github.koalaplot", name = "koalaplot-core", versi
 androidx-core-i18n = { group = "androidx.core", name = "core-i18n", version.ref = "coreI18n" }
 kmp-date-time-picker = { module = "network.chaintech:kmp-date-time-picker", version.ref = "date-time" }
 kmp-uiud = { module = "com.benasher44:uuid", version.ref = "uiud"}
+sqldelight-async = { module = "app.cash.sqldelight:async-extensions", version.ref = "sqldelight" }
+sqldelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -39,4 +41,4 @@ kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = 
 kotlin-plugin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
-sqldelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
+sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
