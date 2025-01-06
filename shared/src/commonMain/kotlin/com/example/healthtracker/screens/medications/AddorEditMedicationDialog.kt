@@ -94,7 +94,7 @@ fun AddOrEditMedicationDialog(
             Box(modifier = Modifier.matchParentSize().clickable { unitExpanded = !unitExpanded })
 
             DropdownMenu(expanded = unitExpanded, onDismissRequest = { unitExpanded = false }) {
-              listOf("pills", "mg", "ml", "μL", "μG").forEach { unit ->
+              listOf("pills", "mg", "ml", "μL", "μG", "units").forEach { unit ->
                 DropdownMenuItem(
                   text = { Text(unit) },
                   onClick = {
