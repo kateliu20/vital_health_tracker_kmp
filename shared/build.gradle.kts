@@ -57,6 +57,10 @@ kotlin {
       implementation(libs.sqldelight.async)
     }
     commonTest.dependencies { implementation(libs.kotlin.test) }
+
+    androidMain.dependencies { implementation(libs.sqldelight.driver.android) }
+
+    iosMain.dependencies { implementation(libs.sqldelight.driver.native) }
   }
 }
 
@@ -74,4 +78,13 @@ dependencies {
   implementation(libs.androidx.runtime.android)
   implementation(libs.compose.material3)
   implementation(libs.androidx.core.i18n)
+}
+
+sqldelight {
+  databases {
+    create("BloodPressure") {
+      packageName.set("com.example.healthtracker.sqldelight")
+      generateAsync.set(true)
+    }
+  }
 }
