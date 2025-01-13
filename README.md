@@ -75,13 +75,24 @@ You can run your Compose Multiplatform application on a real iOS device for free
 ## Screenshots of Vital
 
 ### iOS 
-![ios_add_bp.png](shared/src/commonMain/composeResources/drawable/ios/ios_add_bp.png)
-![ios_appointments.png](shared/src/commonMain/composeResources/drawable/ios/ios_appointments.png)
-![ios_appointments_list.png](shared/src/commonMain/composeResources/drawable/ios/ios_appointments_list.png)
-![ios_appointments_not_today.png](shared/src/commonMain/composeResources/drawable/ios/ios_appointments_not_today.png)
-![ios_bp_trend.png](shared/src/commonMain/composeResources/drawable/ios/ios_bp_trend.png)
-![ios_dashboard_empty.png](shared/src/commonMain/composeResources/drawable/ios/ios_dashboard_empty.png)
-![ios_medicine.png](shared/src/commonMain/composeResources/drawable/ios/ios_medicine.png)
-![ios_medicine_cabinet.png](shared/src/commonMain/composeResources/drawable/ios/ios_medicine_cabinet.png)
-![ios_medicine_edit.png](shared/src/commonMain/composeResources/drawable/ios/ios_medicine_edit.png)
-![ios_welcome.png](shared/src/commonMain/composeResources/drawable/ios/ios_welcome.png)
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;">
+    <img src="shared/src/commonMain/composeResources/drawable/ios/ios_welcome.png" width="30%" alt="ios_welcome">
+    <img src="shared/src/commonMain/composeResources/drawable/ios/ios_dashboard_empty.png" width="30%" alt="ios_dashboard_empty">
+    <img src="shared/src/commonMain/composeResources/drawable/ios/ios_add_bp.png" width="30%" alt="ios_add_bp">
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;">
+    <img src="shared/src/commonMain/composeResources/drawable/ios/ios_bp_trend.png" width="30%" alt="ios_bp_trend">
+    <img src="shared/src/commonMain/composeResources/drawable/ios/ios_medicine.png" width="30%" alt="ios_medicine">
+    <img src="shared/src/commonMain/composeResources/drawable/ios/ios_medicine_cabinet.png" width="30%" alt="ios_medicine_cabinet">
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;">
+    <img src="shared/src/commonMain/composeResources/drawable/ios/ios_medicine_edit.png" width="30%" alt="ios_medicine_edit">
+    <img src="shared/src/commonMain/composeResources/drawable/ios/ios_appointments.png" width="30%" alt="ios_appointments">
+    <img src="shared/src/commonMain/composeResources/drawable/ios/ios_appointments_list.png" width="30%" alt="ios_appointments_list">
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;">
+    <img src="shared/src/commonMain/composeResources/drawable/ios/ios_appointments_not_today.png" width="30%" alt="ios_appointments_not_today">
+</div>
