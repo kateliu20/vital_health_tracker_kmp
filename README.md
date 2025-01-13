@@ -5,6 +5,9 @@ Vital is a comprehensive app designed to help individuals track and manage their
 
 The app features curated articles from the CDC on blood pressure and general health topics, conveniently displayed on the home screen. Additionally, Vital offers a robust set of tools, including a dashboard for insights, a "medicine cabinet" for tracking medications, and a calendar for managing appointments or journaling health-related events.
 
+## Video Demo
+https://www.youtube.com/watch?v=PDgx9eowTpQ
+
 ## Libraries Used
 - **[Compose WebView Multiplatform](https://github.com/KevinnZou/compose-webview-multiplatform)**: Providing basic webview functionalities. Used for tha article cards on the welcome screen.
 - **[Koala Plot](https://github.com/KoalaPlot/koalaplot-core)**: A library for data visualization, used for the blood pressure graphing.
