@@ -18,30 +18,30 @@ import com.example.healthtracker.navigation.Screen
 
 @Composable
 fun BottomNavigationBar(component: HealthComponent, onScreenChanged: (Screen) -> Unit) {
-  val navItemList =
-    listOf(
-      NavItem("Home", Icons.Default.Home, Screen.WelcomeScreen),
-      NavItem("Dashboard", Icons.Default.Menu, Screen.Dashboard),
-      //      NavItem("Add Data", Icons.Default.Add, Screen.BloodPressureTracker),
-      NavItem("Cabinet", Icons.Default.Favorite, Screen.MedicineCabinetScreen),
-      NavItem("Calendar", Icons.Outlined.DateRange, Screen.AppointmentScreen),
-    )
+    val navItemList =
+        listOf(
+            NavItem("Home", Icons.Default.Home, Screen.WelcomeScreen),
+            NavItem("Dashboard", Icons.Default.Menu, Screen.Dashboard),
+            //      NavItem("Add Data", Icons.Default.Add, Screen.BloodPressureTracker),
+            NavItem("Cabinet", Icons.Default.Favorite, Screen.MedicineCabinetScreen),
+            NavItem("Calendar", Icons.Outlined.DateRange, Screen.AppointmentScreen),
+        )
 
-  NavigationBar {
-    navItemList.forEach { navItem ->
-      NavigationBarItem(
-        selected = component.currentScreen.value == navItem.screen,
-        onClick = { onScreenChanged(navItem.screen) },
-        icon = { Icon(imageVector = navItem.icon, contentDescription = navItem.label) },
-        label = { Text(text = navItem.label) },
-        colors =
-          NavigationBarItemDefaults.colors(
-            selectedIconColor = MaterialTheme.colorScheme.primary,
-            selectedTextColor = MaterialTheme.colorScheme.primary,
-            unselectedIconColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
-            unselectedTextColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
-          ),
-      )
+    NavigationBar {
+        navItemList.forEach { navItem ->
+            NavigationBarItem(
+                selected = component.currentScreen.value == navItem.screen,
+                onClick = { onScreenChanged(navItem.screen) },
+                icon = { Icon(imageVector = navItem.icon, contentDescription = navItem.label) },
+                label = { Text(text = navItem.label) },
+                colors =
+                    NavigationBarItemDefaults.colors(
+                        selectedIconColor = MaterialTheme.colorScheme.primary,
+                        selectedTextColor = MaterialTheme.colorScheme.primary,
+                        unselectedIconColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
+                        unselectedTextColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
+                    ),
+            )
+        }
     }
-  }
 }

@@ -10,11 +10,11 @@ import com.example.healthtracker.viewmodels.AppointmentViewModel
 
 @Composable
 fun AppointmentScreen(component: HealthComponent, appointmentViewModel: AppointmentViewModel) {
-  AppScaffold(component = component) { paddingValues ->
-    Scaffold { topBarPadding ->
-      Column(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
-        WeeklyCalendarView(appointmentViewModel)
-      }
+    AppScaffold(component = component) { paddingValues ->
+        Scaffold { topBarPadding ->
+            Column(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
+                WeeklyCalendarView(appointmentViewModel)
+            }
+        }
     }
-  }
 }

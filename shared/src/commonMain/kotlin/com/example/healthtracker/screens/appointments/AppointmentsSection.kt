@@ -27,108 +27,108 @@ import kotlinx.datetime.LocalDate
 
 @Composable
 fun AppointmentsSection(viewModel: AppointmentViewModel, selectedDate: LocalDate) {
-  var showAddDialog by remember { mutableStateOf(false) }
-  val appointmentsForDay = viewModel.appointments.value.filter { it.date == selectedDate }
-  Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-    Text(
-      "Appointments",
-      style = MaterialTheme.typography.titleMedium,
-      modifier = Modifier.padding(bottom = 8.dp),
-    )
+    var showAddDialog by remember { mutableStateOf(false) }
+    val appointmentsForDay = viewModel.appointments.value.filter { it.date == selectedDate }
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Text(
+            "Appointments",
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.padding(bottom = 8.dp),
+        )
 
-    if (appointmentsForDay.isNotEmpty()) {
-      LazyColumn(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        // TODO: sort appointments in chronological order
-        items(appointmentsForDay) { appointment ->
-          AppointmentItem(
-            appointment = appointment,
-            //            onEditClick = { /* TODO */ },
-            onDeleteClick = { viewModel.deleteAppointment(appointment) },
-          )
+        if (appointmentsForDay.isNotEmpty()) {
+            LazyColumn(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                // TODO: sort appointments in chronological order
+                items(appointmentsForDay) { appointment ->
+                    AppointmentItem(
+                        appointment = appointment,
+                        //            onEditClick = { /* TODO */ },
+                        onDeleteClick = { viewModel.deleteAppointment(appointment) },
+                    )
+                }
+            }
+        } else {
+            Text(
+                "No appointments for $selectedDate",
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
         }
-      }
-    } else {
-      Text(
-        "No appointments for $selectedDate",
-        style = MaterialTheme.typography.bodyLarge,
-        color = MaterialTheme.colorScheme.onSurfaceVariant,
-      )
-    }
 
-    Button(
-      onClick = { showAddDialog = true },
-      modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = 16.dp),
-    ) {
-      Text("Add appointment")
-    }
+        Button(
+            onClick = { showAddDialog = true },
+            modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = 16.dp),
+        ) {
+            Text("Add appointment")
+        }
 
-    if (showAddDialog) {
-      AddAppointmentDialog(
-        onDismiss = { showAddDialog = false },
-        onConfirm = { title, selectedDate, time ->
-          viewModel.addAppointment(
-            title = title,
-            date = selectedDate,
-            time = formatAppointmentTime(time),
-          )
-          showAddDialog = false
-        },
-      )
+        if (showAddDialog) {
+            AddAppointmentDialog(
+                onDismiss = { showAddDialog = false },
+                onConfirm = { title, selectedDate, time ->
+                    viewModel.addAppointment(
+                        title = title,
+                        date = selectedDate,
+                        time = formatAppointmentTime(time),
+                    )
+                    showAddDialog = false
+                },
+            )
+        }
     }
-  }
 }
 
 @Composable
 fun AppointmentItem(appointment: Appointment, onDeleteClick: () -> Unit) {
-  Card(
-    modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-  ) {
-    Row(
-      modifier = Modifier.padding(16.dp).fillMaxWidth(),
-      horizontalArrangement = Arrangement.SpaceBetween,
-      verticalAlignment = Alignment.CenterVertically,
+    Card(
+        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
     ) {
-      Column(modifier = Modifier.weight(1f)) {
-        Text(text = appointment.title, style = MaterialTheme.typography.titleMedium)
-        Text(
-          text = appointment.time,
-          style = MaterialTheme.typography.bodyMedium,
-          color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
-      }
+        Row(
+            modifier = Modifier.padding(16.dp).fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(text = appointment.title, style = MaterialTheme.typography.titleMedium)
+                Text(
+                    text = appointment.time,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
 
-      Row {
-        //        IconButton(onClick = onEditClick) { Icon(Icons.Default.Edit, "Edit") }
-        TextButton(onClick = onDeleteClick) {
-          Text("Delete", color = MaterialTheme.colorScheme.error)
+            Row {
+                //        IconButton(onClick = onEditClick) { Icon(Icons.Default.Edit, "Edit") }
+                TextButton(onClick = onDeleteClick) {
+                    Text("Delete", color = MaterialTheme.colorScheme.error)
+                }
+                //        IconButton(onClick = onDeleteClick) { Icon(Icons.Default.Delete, "Delete") }
+            }
         }
-        //        IconButton(onClick = onDeleteClick) { Icon(Icons.Default.Delete, "Delete") }
-      }
     }
-  }
 }
 
 @Composable
 fun ReadOnlyAppointmentItem(appointment: Appointment) {
-  Card(
-    modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
-  ) {
-    Row(
-      modifier = Modifier.padding(16.dp).fillMaxWidth(),
-      horizontalArrangement = Arrangement.SpaceBetween,
-      verticalAlignment = Alignment.CenterVertically,
+    Card(
+        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
     ) {
-      Column(modifier = Modifier.weight(1f)) {
-        Text(text = appointment.title, style = MaterialTheme.typography.titleMedium)
-        Text(
-          text = "${appointment.date} at ${appointment.time}",
-          style = MaterialTheme.typography.bodyMedium,
-          color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
-      }
+        Row(
+            modifier = Modifier.padding(16.dp).fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(text = appointment.title, style = MaterialTheme.typography.titleMedium)
+                Text(
+                    text = "${appointment.date} at ${appointment.time}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+        }
     }
-  }
 }

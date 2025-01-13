@@ -8,14 +8,14 @@ import com.example.healthtracker.screens.welcome.BottomNavigationBar
 
 @Composable
 fun AppScaffold(component: HealthComponent, content: @Composable (PaddingValues) -> Unit) {
-  Scaffold(
-    bottomBar = {
-      BottomNavigationBar(
-        component = component,
-        onScreenChanged = { screen -> component.navigateTo(screen) },
-      )
+    Scaffold(
+        bottomBar = {
+            BottomNavigationBar(
+                component = component,
+                onScreenChanged = { screen -> component.navigateTo(screen) },
+            )
+        }
+    ) { innerPadding ->
+        content(innerPadding)
     }
-  ) { innerPadding ->
-    content(innerPadding)
-  }
 }

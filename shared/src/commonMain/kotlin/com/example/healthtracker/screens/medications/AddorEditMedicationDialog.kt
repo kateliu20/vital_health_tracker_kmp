@@ -34,106 +34,106 @@ import com.example.healthtracker.data.Medication
 
 @Composable
 fun AddOrEditMedicationDialog(
-  medication: Medication?, // null for adding, non-null for editing
-  onDismiss: () -> Unit,
-  onSave: (Medication) -> Unit,
+    medication: Medication?, // null for adding, non-null for editing
+    onDismiss: () -> Unit,
+    onSave: (Medication) -> Unit,
 ) {
-  var name by remember { mutableStateOf(medication?.name ?: "") }
-  var dosage by remember { mutableStateOf(medication?.dosage?.split(" ")?.firstOrNull() ?: "") }
-  var selectedUnit by remember {
-    mutableStateOf(medication?.dosage?.split(" ")?.lastOrNull() ?: "pills")
-  }
-  var notes by remember { mutableStateOf(medication?.notes ?: "") }
+    var name by remember { mutableStateOf(medication?.name ?: "") }
+    var dosage by remember { mutableStateOf(medication?.dosage?.split(" ")?.firstOrNull() ?: "") }
+    var selectedUnit by remember {
+        mutableStateOf(medication?.dosage?.split(" ")?.lastOrNull() ?: "pills")
+    }
+    var notes by remember { mutableStateOf(medication?.notes ?: "") }
 
-  var unitExpanded by remember { mutableStateOf(false) }
+    var unitExpanded by remember { mutableStateOf(false) }
 
-  AlertDialog(
-    onDismissRequest = onDismiss,
-    title = { Text(if (medication == null) "Add Medication" else "Edit Medication") },
-    text = {
-      Column(
-        modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-      ) {
-        // Name input
-        OutlinedTextField(
-          value = name,
-          onValueChange = { name = it },
-          label = { Text("Medication Name") },
-          modifier = Modifier.fillMaxWidth(),
-        )
-
-        Row(
-          modifier = Modifier.fillMaxWidth(),
-          horizontalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-          OutlinedTextField(
-            value = dosage,
-            onValueChange = { dosage = it.filter { char -> char.isDigit() } },
-            modifier = Modifier.weight(1f),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            placeholder = { Text("Dosage") },
-          )
-          Box(modifier = Modifier.width(96.dp)) {
-            OutlinedTextField(
-              value = selectedUnit,
-              onValueChange = {},
-              readOnly = true,
-              modifier = Modifier.fillMaxWidth(),
-              trailingIcon = {
-                Icon(
-                  imageVector =
-                    if (unitExpanded) Icons.Default.KeyboardArrowUp
-                    else Icons.Default.KeyboardArrowDown,
-                  contentDescription = "Select unit",
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(if (medication == null) "Add Medication" else "Edit Medication") },
+        text = {
+            Column(
+                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                // Name input
+                OutlinedTextField(
+                    value = name,
+                    onValueChange = { name = it },
+                    label = { Text("Medication Name") },
+                    modifier = Modifier.fillMaxWidth(),
                 )
-              },
-            )
 
-            // Clickable overlay for dropdown
-            Box(modifier = Modifier.matchParentSize().clickable { unitExpanded = !unitExpanded })
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    OutlinedTextField(
+                        value = dosage,
+                        onValueChange = { dosage = it.filter { char -> char.isDigit() } },
+                        modifier = Modifier.weight(1f),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        placeholder = { Text("Dosage") },
+                    )
+                    Box(modifier = Modifier.width(96.dp)) {
+                        OutlinedTextField(
+                            value = selectedUnit,
+                            onValueChange = {},
+                            readOnly = true,
+                            modifier = Modifier.fillMaxWidth(),
+                            trailingIcon = {
+                                Icon(
+                                    imageVector =
+                                        if (unitExpanded) Icons.Default.KeyboardArrowUp
+                                        else Icons.Default.KeyboardArrowDown,
+                                    contentDescription = "Select unit",
+                                )
+                            },
+                        )
 
-            DropdownMenu(expanded = unitExpanded, onDismissRequest = { unitExpanded = false }) {
-              listOf("pills", "mg", "ml", "μL", "μG", "units").forEach { unit ->
-                DropdownMenuItem(
-                  text = { Text(unit) },
-                  onClick = {
-                    selectedUnit = unit
-                    unitExpanded = false
-                  },
+                        // Clickable overlay for dropdown
+                        Box(modifier = Modifier.matchParentSize().clickable { unitExpanded = !unitExpanded })
+
+                        DropdownMenu(expanded = unitExpanded, onDismissRequest = { unitExpanded = false }) {
+                            listOf("pills", "mg", "ml", "μL", "μG", "units").forEach { unit ->
+                                DropdownMenuItem(
+                                    text = { Text(unit) },
+                                    onClick = {
+                                        selectedUnit = unit
+                                        unitExpanded = false
+                                    },
+                                )
+                            }
+                        }
+                    }
+                }
+                // Notes section
+                OutlinedTextField(
+                    value = notes,
+                    onValueChange = { notes = it },
+                    label = { Text("Notes") },
+                    modifier = Modifier.fillMaxWidth().height(150.dp),
+                    placeholder = { Text("Add any additional notes here") },
+                    maxLines = 4,
                 )
-              }
             }
-          }
-        }
-        // Notes section
-        OutlinedTextField(
-          value = notes,
-          onValueChange = { notes = it },
-          label = { Text("Notes") },
-          modifier = Modifier.fillMaxWidth().height(150.dp),
-          placeholder = { Text("Add any additional notes here") },
-          maxLines = 4,
-        )
-      }
-    },
-    confirmButton = {
-      Button(
-        onClick = {
-          val updatedMedication =
-            Medication(
-              id = medication?.id ?: uuid4().toString(),
-              name = name,
-              dosage = "$dosage $selectedUnit",
-              notes = notes,
-            )
-          onSave(updatedMedication)
-          onDismiss()
-        }
-      ) {
-        Text("Save")
-      }
-    },
-    dismissButton = { TextButton(onClick = onDismiss) { Text("Cancel") } },
-  )
+        },
+        confirmButton = {
+            Button(
+                onClick = {
+                    val updatedMedication =
+                        Medication(
+                            id = medication?.id ?: uuid4().toString(),
+                            name = name,
+                            dosage = "$dosage $selectedUnit",
+                            notes = notes,
+                        )
+                    onSave(updatedMedication)
+                    onDismiss()
+                }
+            ) {
+                Text("Save")
+            }
+        },
+        dismissButton = { TextButton(onClick = onDismiss) { Text("Cancel") } },
+    )
 }

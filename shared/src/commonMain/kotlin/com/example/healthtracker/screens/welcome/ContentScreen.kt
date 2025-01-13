@@ -11,36 +11,40 @@ import com.example.healthtracker.screens.medications.MedicineCabinetScreen
 
 @Composable
 fun ContentScreen(component: HealthComponent) {
-  when (val screen = component.currentScreen.value) {
-    Screen.WelcomeScreen ->
-      WelcomeScreen(
-        component = component,
-        onNavigateToBloodPressure = { component.navigateTo(Screen.Dashboard) },
-        onArticleClick = { articleUrl -> component.navigateTo(WebViewScreen(articleUrl)) },
-      )
-    Screen.Dashboard ->
-      DashboardScreen(
-        component = component,
-        bloodPressureViewModel = component.viewBloodPressureModel,
-        appointmentViewModel = component.appointmentViewModel,
-        onAddReading = { component.navigateTo(Screen.BloodPressureTracker) },
-      )
-    Screen.BloodPressureTracker ->
-      BloodPressureTrackerScreen(
-        component = component,
-        viewModel = component.viewBloodPressureModel,
-        onBackClick = { component.navigateTo(Screen.Dashboard) },
-      )
-    Screen.AppointmentScreen ->
-      AppointmentScreen(
-        component = component,
-        appointmentViewModel = component.appointmentViewModel,
-      )
-    Screen.MedicineCabinetScreen ->
-      MedicineCabinetScreen(component = component, onAddMedication = {})
+    when (val screen = component.currentScreen.value) {
+        Screen.WelcomeScreen ->
+            WelcomeScreen(
+                component = component,
+                onNavigateToBloodPressure = { component.navigateTo(Screen.Dashboard) },
+                onArticleClick = { articleUrl -> component.navigateTo(WebViewScreen(articleUrl)) },
+            )
 
-    is WebViewScreen -> {
-      WebViewScreen(url = screen.url, onBack = { component.navigateTo(Screen.WelcomeScreen) })
+        Screen.Dashboard ->
+            DashboardScreen(
+                component = component,
+                bloodPressureViewModel = component.viewBloodPressureModel,
+                appointmentViewModel = component.appointmentViewModel,
+                onAddReading = { component.navigateTo(Screen.BloodPressureTracker) },
+            )
+
+        Screen.BloodPressureTracker ->
+            BloodPressureTrackerScreen(
+                component = component,
+                viewModel = component.viewBloodPressureModel,
+                onBackClick = { component.navigateTo(Screen.Dashboard) },
+            )
+
+        Screen.AppointmentScreen ->
+            AppointmentScreen(
+                component = component,
+                appointmentViewModel = component.appointmentViewModel,
+            )
+
+        Screen.MedicineCabinetScreen ->
+            MedicineCabinetScreen(component = component)
+
+        is WebViewScreen -> {
+            WebViewScreen(url = screen.url, onBack = { component.navigateTo(Screen.WelcomeScreen) })
+        }
     }
-  }
 }

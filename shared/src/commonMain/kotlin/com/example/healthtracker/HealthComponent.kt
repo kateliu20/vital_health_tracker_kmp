@@ -7,16 +7,16 @@ import com.example.healthtracker.viewmodels.BloodPressureViewModel
 import com.example.healthtracker.viewmodels.MedicationViewModel
 
 class HealthComponent {
-  val viewBloodPressureModel = BloodPressureViewModel()
-  val viewMedicationModel = MedicationViewModel()
-  val appointmentViewModel = AppointmentViewModel()
-  val currentScreen = mutableStateOf<Screen>(Screen.WelcomeScreen)
+    val viewBloodPressureModel = BloodPressureViewModel()
+    val viewMedicationModel = MedicationViewModel()
+    val appointmentViewModel = AppointmentViewModel()
+    val currentScreen = mutableStateOf<Screen>(Screen.WelcomeScreen)
 
-  fun navigateTo(screen: Screen) {
-    currentScreen.value = screen
-  }
+    fun navigateTo(screen: Screen) {
+        currentScreen.value = screen
+    }
 
-  companion object {
-    fun create(): HealthComponent = HealthComponent()
-  }
+    companion object {
+        fun create(): HealthComponent = HealthComponent()
+    }
 }

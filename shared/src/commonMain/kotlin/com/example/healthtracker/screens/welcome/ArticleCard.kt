@@ -27,35 +27,35 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun ArticleCard(article: Article, onArticleClick: (String) -> Unit) {
-  Card(
-    modifier = Modifier.fillMaxWidth().aspectRatio(1f).clickable { onArticleClick(article.url) },
-    colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface),
-    elevation = CardDefaults.elevatedCardElevation(),
-  ) {
-    Box(modifier = Modifier.fillMaxSize()) {
-      Image(
-        painter = painterResource(article.imageRes),
-        contentDescription = article.title,
-        contentScale = ContentScale.Crop,
-        modifier = Modifier.fillMaxSize(),
-      )
-      Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-      ) {
-        Text(
-          text = article.title,
-          style =
-            MaterialTheme.typography.bodyLarge.copy(
-              fontWeight = FontWeight.Bold,
-              color = Color.Black,
-            ),
-          modifier = Modifier.padding(10.dp),
-          textAlign = TextAlign.Center,
-          maxLines = 2,
-          overflow = TextOverflow.Ellipsis,
-        )
-      }
+    Card(
+        modifier = Modifier.fillMaxWidth().aspectRatio(1f).clickable { onArticleClick(article.url) },
+        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.elevatedCardElevation(),
+    ) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            Image(
+                painter = painterResource(article.imageRes),
+                contentDescription = article.title,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize(),
+            )
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Text(
+                    text = article.title,
+                    style =
+                        MaterialTheme.typography.bodyLarge.copy(
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Black,
+                        ),
+                    modifier = Modifier.padding(10.dp),
+                    textAlign = TextAlign.Center,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                )
+            }
+        }
     }
-  }
 }

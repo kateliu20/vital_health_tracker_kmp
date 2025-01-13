@@ -6,7 +6,5 @@ import com.example.healthtracker.screens.welcome.ContentScreen
 
 @Composable
 fun app(component: HealthComponent) {
-  //    WeeklyCalendarView(component = component)
   ContentScreen(component = component)
-  //  ScrollableChartScreen()
 }

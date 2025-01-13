@@ -21,27 +21,27 @@ import com.multiplatform.webview.web.rememberWebViewState
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WebViewScreen(url: String, onBack: () -> Unit) {
-  val state = rememberWebViewState(url)
+    val state = rememberWebViewState(url)
 
-  Box(modifier = Modifier.fillMaxSize()) {
-    Column(modifier = Modifier.fillMaxSize()) {
-      TopAppBar(
-        title = { Text(text = state.pageTitle ?: "Loading...") },
-        navigationIcon = {
-          IconButton(onClick = onBack) {
-            Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
-          }
-        },
-      )
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            TopAppBar(
+                title = { Text(text = state.pageTitle ?: "Loading...") },
+                navigationIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                    }
+                },
+            )
 
-      if (state.loadingState is LoadingState.Loading) {
-        LinearProgressIndicator(
-          progress = { (state.loadingState as LoadingState.Loading).progress },
-          modifier = Modifier.fillMaxWidth(),
-        )
-      }
+            if (state.loadingState is LoadingState.Loading) {
+                LinearProgressIndicator(
+                    progress = { (state.loadingState as LoadingState.Loading).progress },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
 
-      WebView(state = state, modifier = Modifier.fillMaxSize())
+            WebView(state = state, modifier = Modifier.fillMaxSize())
+        }
     }
-  }
 }

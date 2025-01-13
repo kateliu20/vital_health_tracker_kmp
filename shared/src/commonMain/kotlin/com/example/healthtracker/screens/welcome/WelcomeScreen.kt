@@ -27,48 +27,48 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun WelcomeScreen(
-  component: HealthComponent,
-  onNavigateToBloodPressure: () -> Unit,
-  onArticleClick: (String) -> Unit,
+    component: HealthComponent,
+    onNavigateToBloodPressure: () -> Unit,
+    onArticleClick: (String) -> Unit,
 ) {
-  AppScaffold(component = component) { innerPadding ->
-    Column(
-      modifier = Modifier.fillMaxSize().padding(innerPadding).padding(16.dp),
-      verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically),
-      horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-      Text(
-        text = "Welcome to",
-        style =
-          MaterialTheme.typography.headlineMedium.copy(
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary,
-          ),
-      )
-      Image(
-        painter = painterResource(Res.drawable.vital),
-        contentDescription = "Vital Logo",
-        modifier = Modifier.fillMaxWidth(),
-      )
-      Button(onClick = onNavigateToBloodPressure, modifier = Modifier.padding(4.dp).height(40.dp)) {
-        Text("Go to Health Dashboard")
-      }
-      //      Spacer(modifier = Modifier.height(12.dp))
+    AppScaffold(component = component) { innerPadding ->
+        Column(
+            modifier = Modifier.fillMaxSize().padding(innerPadding).padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(
+                text = "Welcome to",
+                style =
+                    MaterialTheme.typography.headlineMedium.copy(
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary,
+                    ),
+            )
+            Image(
+                painter = painterResource(Res.drawable.vital),
+                contentDescription = "Vital Logo",
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Button(onClick = onNavigateToBloodPressure, modifier = Modifier.padding(4.dp).height(40.dp)) {
+                Text("Go to Health Dashboard")
+            }
+            //      Spacer(modifier = Modifier.height(12.dp))
 
-      // Articles Section
-      LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier.fillMaxSize().padding(16.dp),
-      ) {
-        items(articles) { article ->
-          ArticleCard(
-            article = article,
-            onArticleClick = { articleUrl -> onArticleClick(articleUrl) },
-          )
+            // Articles Section
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier.fillMaxSize().padding(16.dp),
+            ) {
+                items(articles) { article ->
+                    ArticleCard(
+                        article = article,
+                        onArticleClick = { articleUrl -> onArticleClick(articleUrl) },
+                    )
+                }
+            }
         }
-      }
     }
-  }
 }

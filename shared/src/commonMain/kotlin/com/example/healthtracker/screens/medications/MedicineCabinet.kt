@@ -36,89 +36,86 @@ import org.jetbrains.compose.resources.painterResource
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MedicineCabinetScreen(
-  component: HealthComponent, // Access models via HealthComponent
-  onAddMedication: () -> Unit, // Callback for adding a medication
-  //    onEditMedication: (Medication) -> Unit // Callback for editing a medication
+    component: HealthComponent
 ) {
-  val medications = component.viewMedicationModel.medications // Observe the list of medications
-  var showAddMedicationDialog by remember { mutableStateOf(false) }
-  var medicationToEdit by remember { mutableStateOf<Medication?>(null) }
+    var showAddMedicationDialog by remember { mutableStateOf(false) }
+    var medicationToEdit by remember { mutableStateOf<Medication?>(null) }
 
-  AppScaffold(component = component) { paddingValues ->
-    Scaffold(
-      topBar = {
-        TopAppBar(
-          title = { Text("Medicine Cabinet") },
-          actions = {
-            IconButton(onClick = { showAddMedicationDialog = true }) {
-              Icon(Icons.Default.Add, contentDescription = "Add Medication")
+    AppScaffold(component = component) { paddingValues ->
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text("Medicine Cabinet") },
+                    actions = {
+                        IconButton(onClick = { showAddMedicationDialog = true }) {
+                            Icon(Icons.Default.Add, contentDescription = "Add Medication")
+                        }
+                    },
+                )
             }
-          },
-        )
-      }
-    ) { paddingValues ->
-      val medications = component.viewMedicationModel.medications
+        ) { paddingValues ->
+            val medications = component.viewMedicationModel.medications
 
-      Column(modifier = Modifier.fillMaxSize().padding(paddingValues).padding(16.dp)) {
-        if (medications.isEmpty()) {
-          Image(
-            painter = painterResource(Res.drawable.medicine),
-            contentDescription = "Medication",
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
-          )
-          Text(
-            text = "No medications in the cabinet right now",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-          )
-          Button(
-            onClick = { showAddMedicationDialog = true },
-            modifier =
-              Modifier.padding(16.dp).align(Alignment.CenterHorizontally), // Center the button
-          ) {
-            Text("Add medication")
-          }
-        } else {
-          LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-          ) {
-            items(medications) { medication ->
-              MedicationCard(
-                medication = medication,
-                onEditMedication = { selectedMedication ->
-                  medicationToEdit = selectedMedication // Open the edit dialog
-                },
-                onDeleteMedication = { selectedMedication ->
-                  // Handle deleting this medication
-                  component.viewMedicationModel.deleteMedication(selectedMedication)
-                  // println("Delete clicked for ${selectedMedication.name}")
-                },
-              )
+            Column(modifier = Modifier.fillMaxSize().padding(paddingValues).padding(16.dp)) {
+                if (medications.isEmpty()) {
+                    Image(
+                        painter = painterResource(Res.drawable.medicine),
+                        contentDescription = "Medication",
+                        modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    )
+                    Text(
+                        text = "No medications in the cabinet right now",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.align(Alignment.CenterHorizontally),
+                    )
+                    Button(
+                        onClick = { showAddMedicationDialog = true },
+                        modifier =
+                            Modifier.padding(16.dp).align(Alignment.CenterHorizontally), // Center the button
+                    ) {
+                        Text("Add medication")
+                    }
+                } else {
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        items(medications) { medication ->
+                            MedicationCard(
+                                medication = medication,
+                                onEditMedication = { selectedMedication ->
+                                    medicationToEdit = selectedMedication // Open the edit dialog
+                                },
+                                onDeleteMedication = { selectedMedication ->
+                                    // Handle deleting this medication
+                                    component.viewMedicationModel.deleteMedication(selectedMedication)
+                                    // println("Delete clicked for ${selectedMedication.name}")
+                                },
+                            )
+                        }
+                    }
+                }
             }
-          }
         }
-      }
     }
-  }
 
-  if (showAddMedicationDialog || medicationToEdit != null) {
-    AddOrEditMedicationDialog(
-      medication = medicationToEdit,
-      onDismiss = {
-        showAddMedicationDialog = false
-        medicationToEdit = null
-      },
-      onSave = { updatedMedication ->
-        if (medicationToEdit == null) {
-          component.viewMedicationModel.addMedication(updatedMedication)
-        } else {
-          component.viewMedicationModel.updateMedication(medicationToEdit!!, updatedMedication)
-        }
-        showAddMedicationDialog = false
-        medicationToEdit = null
-      },
-    )
-  }
+    if (showAddMedicationDialog || medicationToEdit != null) {
+        AddOrEditMedicationDialog(
+            medication = medicationToEdit,
+            onDismiss = {
+                showAddMedicationDialog = false
+                medicationToEdit = null
+            },
+            onSave = { updatedMedication ->
+                if (medicationToEdit == null) {
+                    component.viewMedicationModel.addMedication(updatedMedication)
+                } else {
+                    component.viewMedicationModel.updateMedication(medicationToEdit!!, updatedMedication)
+                }
+                showAddMedicationDialog = false
+                medicationToEdit = null
+            },
+        )
+    }
 }

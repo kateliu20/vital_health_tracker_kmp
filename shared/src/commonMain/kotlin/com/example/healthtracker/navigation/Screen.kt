@@ -1,15 +1,15 @@
 package com.example.healthtracker.navigation
 
 sealed class Screen {
-  data object WelcomeScreen : Screen()
+    data object WelcomeScreen : Screen()
 
-  data object Dashboard : Screen()
+    data object Dashboard : Screen()
 
-  data object BloodPressureTracker : Screen()
+    data object BloodPressureTracker : Screen()
 
-  data object AppointmentScreen : Screen()
+    data object AppointmentScreen : Screen()
 
-  data object MedicineCabinetScreen : Screen()
+    data object MedicineCabinetScreen : Screen()
 
-  data class WebViewScreen(val url: String) : Screen()
+    data class WebViewScreen(val url: String) : Screen()
 }
