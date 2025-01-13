@@ -74,7 +74,7 @@ You can run your Compose Multiplatform application on a real iOS device for free
 
 ## Screenshots of Vital
 
-### iOS 
+### iOS, Android in Youtube Demo above
 <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;">
     <img src="shared/src/commonMain/composeResources/drawable/ios/ios_welcome.png" width="30%" alt="ios_welcome">
     <img src="shared/src/commonMain/composeResources/drawable/ios/ios_dashboard_empty.png" width="30%" alt="ios_dashboard_empty">
@@ -95,4 +95,5 @@ You can run your Compose Multiplatform application on a real iOS device for free
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;">
     <img src="shared/src/commonMain/composeResources/drawable/ios/ios_appointments_not_today.png" width="30%" alt="ios_appointments_not_today">
+    <img src="shared/src/commonMain/composeResources/drawable/ios/ios_web_view.png" width="30%" alt="ios_web_view">
 </div>
