@@ -71,3 +71,17 @@ You can run your Compose Multiplatform application on a real iOS device for free
 ---
 
 > **Note**: This application is distributed under the License on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+## Screenshots of Vital
+
+### iOS 
+![ios_add_bp.png](shared/src/commonMain/composeResources/drawable/ios/ios_add_bp.png)
+![ios_appointments.png](shared/src/commonMain/composeResources/drawable/ios/ios_appointments.png)
+![ios_appointments_list.png](shared/src/commonMain/composeResources/drawable/ios/ios_appointments_list.png)
+![ios_appointments_not_today.png](shared/src/commonMain/composeResources/drawable/ios/ios_appointments_not_today.png)
+![ios_bp_trend.png](shared/src/commonMain/composeResources/drawable/ios/ios_bp_trend.png)
+![ios_dashboard_empty.png](shared/src/commonMain/composeResources/drawable/ios/ios_dashboard_empty.png)
+![ios_medicine.png](shared/src/commonMain/composeResources/drawable/ios/ios_medicine.png)
+![ios_medicine_cabinet.png](shared/src/commonMain/composeResources/drawable/ios/ios_medicine_cabinet.png)
+![ios_medicine_edit.png](shared/src/commonMain/composeResources/drawable/ios/ios_medicine_edit.png)
+![ios_welcome.png](shared/src/commonMain/composeResources/drawable/ios/ios_welcome.png)
