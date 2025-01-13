@@ -77,23 +77,23 @@ You can run your Compose Multiplatform application on a real iOS device for free
 ### iOS, Android in Youtube Demo above
 <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;">
     <img src="shared/src/commonMain/composeResources/drawable/ios/ios_welcome.png" width="30%" alt="ios_welcome">
+    <img src="shared/src/commonMain/composeResources/drawable/ios/ios_web_view.png" width="30%" alt="ios_web_view">
     <img src="shared/src/commonMain/composeResources/drawable/ios/ios_dashboard_empty.png" width="30%" alt="ios_dashboard_empty">
-    <img src="shared/src/commonMain/composeResources/drawable/ios/ios_add_bp.png" width="30%" alt="ios_add_bp">
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;">
+    <img src="shared/src/commonMain/composeResources/drawable/ios/ios_add_bp.png" width="30%" alt="ios_add_bp">
     <img src="shared/src/commonMain/composeResources/drawable/ios/ios_bp_trend.png" width="30%" alt="ios_bp_trend">
     <img src="shared/src/commonMain/composeResources/drawable/ios/ios_medicine.png" width="30%" alt="ios_medicine">
-    <img src="shared/src/commonMain/composeResources/drawable/ios/ios_medicine_cabinet.png" width="30%" alt="ios_medicine_cabinet">
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;">
+    <img src="shared/src/commonMain/composeResources/drawable/ios/ios_medicine_cabinet.png" width="30%" alt="ios_medicine_cabinet">
     <img src="shared/src/commonMain/composeResources/drawable/ios/ios_medicine_edit.png" width="30%" alt="ios_medicine_edit">
     <img src="shared/src/commonMain/composeResources/drawable/ios/ios_appointments.png" width="30%" alt="ios_appointments">
-    <img src="shared/src/commonMain/composeResources/drawable/ios/ios_appointments_list.png" width="30%" alt="ios_appointments_list">
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;">
+    <img src="shared/src/commonMain/composeResources/drawable/ios/ios_appointments_list.png" width="30%" alt="ios_appointments_list">
     <img src="shared/src/commonMain/composeResources/drawable/ios/ios_appointments_not_today.png" width="30%" alt="ios_appointments_not_today">
-    <img src="shared/src/commonMain/composeResources/drawable/ios/ios_web_view.png" width="30%" alt="ios_web_view">
 </div>
